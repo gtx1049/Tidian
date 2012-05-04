@@ -11,6 +11,7 @@ a:focus
 }
 #editorcontainer
 { 
+    width: 780px;
     height: 200px; 
     display: none;
 }

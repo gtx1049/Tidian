@@ -74,8 +74,9 @@ public class EditHandle extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession usersession = request.getSession();
-        //afuction to jugde user
-        int userid = judgeUser(usersession);
+        //class to jugde user
+        Dealuser dealuser = new Dealuser(usersession);
+        int userid = dealuser.judgeUser();
         
         request.setCharacterEncoding("UTF-8");
         String htmlData = request.getParameter("content") != null ? request.getParameter("content") : "";
@@ -131,8 +132,4 @@ public class EditHandle extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    public int judgeUser(HttpSession usersession)
-    {
-        return 1;
-    }
 }

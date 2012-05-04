@@ -16,6 +16,7 @@ public class Quesdisplay
     private String level;
     private String date;
     private String asker;
+    private int quesID;
     
     public Quesdisplay()
     {
@@ -46,6 +47,7 @@ public class Quesdisplay
         this.question = question;
         this.content = new String(question.getContent());
         this.date = this.question.getDate().toString();
+        this.quesID = this.getQuesID();
         switch(this.question.getPoint() / 10)
         {
             case 0:
@@ -84,5 +86,15 @@ public class Quesdisplay
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getQuesID() {
+        return quesID;
+    }
+
+    public void setQuesID(int quesID) {
+        this.quesID = quesID;
+    }
+    
+    
     
 }

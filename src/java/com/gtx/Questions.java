@@ -6,6 +6,7 @@ package com.gtx;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,6 +31,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Questions.findByDate", query = "SELECT q FROM Questions q WHERE q.date = :date"),
     @NamedQuery(name = "Questions.findByStatus", query = "SELECT q FROM Questions q WHERE q.status = :status")})
 public class Questions implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "content")
+    private byte[] content;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,11 +66,6 @@ public class Questions implements Serializable {
     private Integer tagid;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Column(name = "content")
-    private byte[] content;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "point")
     private int point;
     @Basic(optional = false)
@@ -68,15 +74,12 @@ public class Questions implements Serializable {
     private int collectNumber;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 4)
     @Column(name = "status")
     private String status;
-
+    @OneToMany(mappedBy = "question")
+    private Set<Answers> answer;
+    
     public Questions() {
     }
 
@@ -136,14 +139,6 @@ public class Questions implements Serializable {
         this.tagid = tagid;
     }
 
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
-    }
-
     public int getPoint() {
         return point;
     }
@@ -158,14 +153,6 @@ public class Questions implements Serializable {
 
     public void setCollectNumber(int collectNumber) {
         this.collectNumber = collectNumber;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getStatus() {
@@ -195,10 +182,35 @@ public class Questions implements Serializable {
         }
         return true;
     }
-
+    
+    public Set<Answers> getAnswers()
+    {
+        return answer;
+    }
+    public void setAnswers(Set<Answers> answers)
+    {
+        this.answer = answers;
+    }
+    
     @Override
     public String toString() {
         return "com.gtx.Questions[ queId=" + queId + " ]";
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
     
 }

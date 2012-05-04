@@ -25,14 +25,15 @@
     {
         $("#button_ok").click(function()
         {           
-            if($("#editor_id").val() == "")
-                {
-                    alert("内容不能为空！");
-                    return false;
-                }
+            //if($("#editor_id").text() == "")
+            //    {
+            //        alert("内容不能为空！");
+            //        return false;
+            //    }
         })
         var editor = KindEditor.create('textarea[name="content"]', 
          {
+                                                width: '770px',
                                                 fontSizeTable : '18x',
               					resizeType : 0,
                                                 items : [
@@ -72,15 +73,15 @@
         <div class="anwserblock">
             <p>我要回答</p>
             <div id="editorcontainer" style="display: block">
-                <form action="AnwserHandle" method="post">
-                <textarea id="editor_id" name="content" style="width:800px;height:200px;"></textarea>
-                <div id="canvascontainer" style="display: none; width: 800px; height: 200px"
-                    <canvas id="thecanvas"></canvas>        
-                </div>
-                <div style="text-align: center">  
-                    <button id="button_ok">OK</button>
-                </div>
-            </form>
+                <form action="AnswerHandle?queID=${theques.getQuesID()}" method="post">
+                    <textarea id="editor_id" name="content" style="width:800px;height:200px;"></textarea>
+                    <div id="canvascontainer" style="display: none; width: 800px; height: 200px"
+                        <canvas id="thecanvas"></canvas>        
+                    </div>
+                    <div style="text-align: center">  
+                        <button id="button_ok">OK</button>
+                    </div>
+                </form>
             </div>
         </div>
         

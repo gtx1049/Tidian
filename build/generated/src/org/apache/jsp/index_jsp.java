@@ -62,14 +62,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            return false;\n");
       out.write("        })\n");
       out.write("        $(\"#button_ok\").click(function()\n");
-      out.write("        {\n");
-      out.write("            \n");
+      out.write("        {           \n");
       out.write("            if($(\"#editor_id\").val() == \"\")\n");
       out.write("                {\n");
       out.write("                    alert(\"内容不能为空！\");\n");
       out.write("                    return false;\n");
       out.write("                }\n");
-      out.write("            return false;\n");
       out.write("        })\n");
       out.write("        var editor = KindEditor.create('textarea[name=\"content\"]', \n");
       out.write("         {\n");
