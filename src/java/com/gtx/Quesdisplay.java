@@ -47,7 +47,7 @@ public class Quesdisplay
         this.question = question;
         this.content = new String(question.getContent());
         this.date = this.question.getDate().toString();
-        this.quesID = this.getQuesID();
+        this.quesID = this.question.getQueId();
         switch(this.question.getPoint() / 10)
         {
             case 0:

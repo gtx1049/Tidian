@@ -73,7 +73,7 @@
         <div class="anwserblock">
             <p>我要回答</p>
             <div id="editorcontainer" style="display: block">
-                <form action="AnswerHandle?queID=${theques.getQuesID()}" method="post">
+                <form action="AnswerHandle?queID=<%=theques.getQuesID()%>" method="post">
                     <textarea id="editor_id" name="content" style="width:800px;height:200px;"></textarea>
                     <div id="canvascontainer" style="display: none; width: 800px; height: 200px"
                         <canvas id="thecanvas"></canvas>        
