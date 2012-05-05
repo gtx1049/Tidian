@@ -5,8 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.gtx.Quesdisplay" %>
 <jsp:useBean id="theques" class="com.gtx.Quesdisplay" scope="request"/>
+
 <%
     if(theques.getContent() == null)
     {
@@ -70,6 +72,21 @@
                 <button id="descroe">减1分</button>
             </div>
         </div>
+        <c:forEach var="oneans" items="${answers}">
+            <div class="anwserblockdis">
+                <p>"${oneans.getContent()}"</p>
+                <hr class="hr1">
+                <div class="sign">
+                    <p>提问人：<c:out value="${oneans.getRespondent()}"></c:out></p>
+                    <p>在<c:out value="${oneans.getDate()}"></c:out></p>
+                </div>
+                <div class="socrecontrol">
+                    score:<c:out value="${oneans.getScore()}"></c:out>
+                    <button id="addscore">加1分</button>
+                    <button id="descroe">减1分</button>
+                </div>
+            </div>
+        </c:forEach>
         <div class="anwserblock">
             <p>我要回答</p>
             <div id="editorcontainer" style="display: block">
