@@ -2,10 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gtx;
+package com.servelet;
 
+import com.entity.Questions;
+import com.entity.Answers;
+import com.entity.Users;
+import com.gtx.Ansdisplay;
+import com.gtx.Quesdisplay;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,17 +51,33 @@ public class QuesFromDB extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
             Integer queid = Integer.parseInt(request.getParameter("quesID"));
+
             Questions question = null;
             Users user = null;
-        
+            Set<Answers> answers = null;
+            List ansdis = new ArrayList();
+
             EntityManager entityManager = entityManagerFactory.createEntityManager();
             try
             {
-                userTransaction.begin();
+                userTransaction.begin();                
                 question = entityManager.find(Questions.class, queid);
                 user = entityManager.find(Users.class, question.getUsrId());
+                entityManager.refresh(question);
+                entityManager.refresh(user);
+                answers = question.getAnswers();
+                Iterator it = answers.iterator();
+                while(it.hasNext())
+                {
+                    Answers tempans = (Answers)it.next();
+                    Users ansuser = entityManager.find(Users.class, tempans.getUsrId());
+                    entityManager.refresh(ansuser);
+                    Ansdisplay ans = new Ansdisplay();
+                    ans.setAnswers(tempans);
+                    ans.setTheuser(ansuser);
+                    ansdis.add(ans);
+                }
                 userTransaction.commit();
             }
             catch(Exception e)
@@ -63,12 +88,15 @@ public class QuesFromDB extends HttpServlet {
             if(question == null || user == null)
             {
                 request.getRequestDispatcher("errorpage.jsp").forward(request, response);
-            }
+            }                        
             
             Quesdisplay quesdisplay = new Quesdisplay();
             quesdisplay.setQuestion(question);
             quesdisplay.setTheuser(user);
+            ansSort(ansdis);
             request.setAttribute("theques", quesdisplay);
+            request.setAttribute("answers", ansdis);            
+            
             request.getRequestDispatcher("QandA.jsp").forward(request, response);
     }
 
@@ -112,4 +140,23 @@ public class QuesFromDB extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
+    
+    public void ansSort(List answers)
+    {
+        for(int i = 0; i < answers.size(); i++)
+        {
+            for(int j = i + 1; j < answers.size(); j++)
+            {     
+                Ansdisplay ansforward = (Ansdisplay) answers.get(i);
+                Ansdisplay ansback = (Ansdisplay)answers.get(j);
+                if(ansforward.getAnsID() > ansback.getAnsID())
+                {
+                    answers.set(i, ansback);
+                    answers.set(j, ansforward);
+                }
+            }
+        }
+    }
 }

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gtx;
+package com.entity;
 
+import com.entity.Answers;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;

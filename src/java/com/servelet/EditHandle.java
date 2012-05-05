@@ -2,8 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gtx;
+package com.servelet;
 
+import com.entity.Questions;
+import com.entity.Users;
+import com.gtx.Dealuser;
+import com.gtx.Quesdisplay;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -107,6 +111,7 @@ public class EditHandle extends HttpServlet {
             {
                 userTransaction.begin();
                 theuser = entityManager.find(Users.class, userid);
+                entityManager.refresh(theuser);
                 entityManager.persist(newques);
                 userTransaction.commit();
             }
