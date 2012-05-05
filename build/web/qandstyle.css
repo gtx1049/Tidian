@@ -90,6 +90,15 @@ a:focus
 {
     height: 280px;
 }
+.anwserblockdis
+{
+    padding:5px 10px; 
+    border-radius:10px;
+    -moz-border-radius:25px; 
+    background-color: #E9ECA2;
+    border:2px solid #a1a1a1;
+    font: 100% Arial, Helvetica, sans-serif;
+}
 .socrecontrol
 {
     text-align: right;

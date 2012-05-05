@@ -4,6 +4,10 @@
  */
 package com.gtx;
 
+import com.entity.Questions;
+import com.entity.Users;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Administrator
@@ -44,9 +48,10 @@ public class Quesdisplay
     }
 
     public void setQuestion(Questions question) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         this.question = question;
         this.content = new String(question.getContent());
-        this.date = this.question.getDate().toString();
+        this.date = formatter.format(this.question.getDate());
         this.quesID = this.question.getQueId();
         switch(this.question.getPoint() / 10)
         {
@@ -55,10 +60,13 @@ public class Quesdisplay
                 break;
             case 1:
                 level = "青铜";
+                break;
             case 2:
                 level = "白银";
+                break;
             case 3:
                 level = "黄金";
+                break;
         }
     }
 

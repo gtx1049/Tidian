@@ -24,11 +24,11 @@
         })
         $("#button_ok").click(function()
         {           
-            if($("#editor_id").val() == "")
-                {
-                    alert("内容不能为空！");
-                    return false;
-                }
+            //if($("#editor_id").val() == "")
+            //    {
+            //        alert("内容不能为空！");
+            //        return false;
+            //    }
         })
         var editor = KindEditor.create('textarea[name="content"]', 
          {
@@ -38,7 +38,7 @@
 						'forecolor', 'hilitecolor', 'bold', 'underline',
 						'removeformat', '|', 'insertorderedlist',
 						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-                });
+         });
     })
 </script>
 

@@ -63,11 +63,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        })\n");
       out.write("        $(\"#button_ok\").click(function()\n");
       out.write("        {           \n");
-      out.write("            if($(\"#editor_id\").val() == \"\")\n");
-      out.write("                {\n");
-      out.write("                    alert(\"内容不能为空！\");\n");
-      out.write("                    return false;\n");
-      out.write("                }\n");
+      out.write("            //if($(\"#editor_id\").val() == \"\")\n");
+      out.write("            //    {\n");
+      out.write("            //        alert(\"内容不能为空！\");\n");
+      out.write("            //        return false;\n");
+      out.write("            //    }\n");
       out.write("        })\n");
       out.write("        var editor = KindEditor.create('textarea[name=\"content\"]', \n");
       out.write("         {\n");
@@ -77,7 +77,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t'forecolor', 'hilitecolor', 'bold', 'underline',\n");
       out.write("\t\t\t\t\t\t'removeformat', '|', 'insertorderedlist',\n");
       out.write("\t\t\t\t\t\t'insertunorderedlist', '|', 'emoticons', 'image', 'link']\n");
-      out.write("                });\n");
+      out.write("         });\n");
       out.write("    })\n");
       out.write("</script>\n");
       out.write("\n");
