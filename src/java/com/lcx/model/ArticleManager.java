@@ -2,13 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.model;
+package com.lcx.model;
 
-import com.javabean.Article;
-import com.javabean.Person_article;
+import com.entity.Articles;
+import com.entity.PersonArticles;
+import com.entity.PersonArticlesPK;
+import com.entity.Users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,50 +35,51 @@ public class ArticleManager {
     }
     
     public int getSize(int id){
-        List<Article> articles = getArticle(id);
+        List<Articles> articles = getArticle(id);
         return articles.size();
     }
     
-    public List<Article> getSpecifyArticle(int page,int id){
-        String sql = "select u from Person_article u where "+"u.usr_id"+" ="+ id;           
+    public List<Articles> getSpecifyArticle(int page,int id){
+        String sql = "select u from PersonArticles u where " + "u.users.usrId" + "=" + id;           
         Query query = (Query) entityManager.createQuery(sql);
+        
         
         query.setFirstResult(page*10);
         query.setMaxResults(10);
         
-        List<Person_article> person_articles = query.getResultList();
+        List<PersonArticles> person_articles = query.getResultList();
         
-        List<Article> articles = new ArrayList<Article>();
+        List<Articles> articles = new ArrayList<Articles>();
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         Iterator it = person_articles.iterator();
         while(it.hasNext()){
-            int index = ((Person_article)it.next()).getArt_id();            
+            int index = ((PersonArticles)it.next()).getPersonArticlesPK().getArtId();            
             numbers.add(index);
         }
         for(int i =0 ;i<numbers.size();i++){
             int index = numbers.get(i);
-            Article find = entityManager.find(Article.class, index);
+            Articles find = entityManager.find(Articles.class, index);
             articles.add(find);
         }
         return articles;
     }
     
-    public List<Article> getArticle(int id){
-            String sql = "select u from Person_article u where "+"u.usr_id"+" ="+ id;           
-        Query query = (Query) entityManager.createQuery(sql);
+    public List<Articles> getArticle(int id){
         
-        List<Person_article> person_articles = query.getResultList();
+        Users theuser = entityManager.find(Users.class, id);
+        Collection person_articles = theuser.getPersonArticlesCollection();
         
-        List<Article> articles = new ArrayList<Article>();
+        
+        List<Articles> articles = new ArrayList<Articles>();
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         Iterator it = person_articles.iterator();
         while(it.hasNext()){
-            int index = ((Person_article)it.next()).getArt_id();            
+            int index = ((PersonArticles)it.next()).getPersonArticlesPK().getArtId();            
             numbers.add(index);
         }
         for(int i =0 ;i<numbers.size();i++){
             int index = numbers.get(i);
-            Article find = entityManager.find(Article.class, index);
+            Articles find = entityManager.find(Articles.class, index);
             articles.add(find);
         }
         return articles;

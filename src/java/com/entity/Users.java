@@ -7,11 +7,13 @@ package com.entity;
 
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +35,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Users.findByExperience", query = "SELECT u FROM Users u WHERE u.experience = :experience"),
     @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status")})
 public class Users implements Serializable {
+    @Basic(optional =     false)
+    @NotNull
+    @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<PersonQuestions> personQuestionsCollection;
+    @Size(max = 96)
+    @Column(name = "portrait")
+    private String portrait;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private Collection<PersonArticles> personArticlesCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,11 +80,6 @@ public class Users implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "province")
     private String province;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "birthday")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date birthday;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 4)
@@ -154,14 +163,6 @@ public class Users implements Serializable {
         this.province = province;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     public String getSex() {
         return sex;
     }
@@ -209,6 +210,40 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "com.gtx.Users[ usrId=" + usrId + " ]";
+    }
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
+    }
+
+    @XmlTransient
+    public Collection<PersonArticles> getPersonArticlesCollection() {
+        return personArticlesCollection;
+    }
+
+    public void setPersonArticlesCollection(Collection<PersonArticles> personArticlesCollection) {
+        this.personArticlesCollection = personArticlesCollection;
+    }
+
+    @XmlTransient
+    public Collection<PersonQuestions> getPersonQuestionsCollection() {
+        return personQuestionsCollection;
+    }
+
+    public void setPersonQuestionsCollection(Collection<PersonQuestions> personQuestionsCollection) {
+        this.personQuestionsCollection = personQuestionsCollection;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
     
 }

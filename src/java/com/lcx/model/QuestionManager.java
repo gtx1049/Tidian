@@ -2,10 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.model;
+package com.lcx.model;
 
-import com.javabean.*;
+import com.entity.PerQueContent;
+import com.entity.Questions;
+import com.entity.PersonQuestions;
+import com.entity.Users;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -36,10 +40,10 @@ public class QuestionManager {
             return null;
     }
     public List<PersonQuestions> getPersonQuestions(int id){
-        String sql = "select u from PersonQuestions u where "+"u.usrId"+" ="+ id;           
-        Query query = (Query) entityManager.createQuery(sql);        
-        List<PersonQuestions> personQuestions = new ArrayList<PersonQuestions>();
-        personQuestions = query.getResultList();
+        Users user = entityManager.find(Users.class, id);
+        Collection personque = user.getPersonQuestionsCollection();
+        List<PersonQuestions> personQuestions = new ArrayList<PersonQuestions>(personque);
+        
         return personQuestions;
 
     }
@@ -47,13 +51,13 @@ public class QuestionManager {
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         String sql = "select u from Per_que_content u where "+"u.pq_id"+" ="+ id;
         Query query = (Query) entityManager.createQuery(sql);
-        List<Per_que_content> per_que_content = query.getResultList();
+        List<PerQueContent> per_que_content = query.getResultList();
         
         List<Questions> questions = new ArrayList<Questions>();
        
         Iterator it = per_que_content.iterator();
         while(it.hasNext()){
-            int index = ((Per_que_content)it.next()).getQue_id();            
+            int index = ((PerQueContent)it.next()).getPerQueContentPK().getQueId();            
             numbers.add(index);
         }
         for(int i =0 ;i<numbers.size();i++){

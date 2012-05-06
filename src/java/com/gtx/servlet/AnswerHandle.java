@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.servelet;
+package com.gtx.servlet;
 
 import com.entity.Questions;
 import com.entity.Answers;

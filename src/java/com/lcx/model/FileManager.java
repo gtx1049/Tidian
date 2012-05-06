@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.model;
+package com.lcx.model;
 
 
-import com.javabean.User;
+import com.entity.Users;
 import com.sun.xml.internal.ws.client.RequestContext;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -36,9 +36,9 @@ public class FileManager {
         if (FileUpload.isMultipartContent(requestContext)) {  
   
             DiskFileItemFactory factory = new DiskFileItemFactory();
-            String path = "C:/Users/Administrator/Documents/NetBeansProjects/WebApplication4/web/resource/";
-            User user = (User)(request.getSession().getAttribute("user"));
-            String username = user.getUsr_name();
+            String path = "D:/";
+            Users user = (Users)(request.getSession().getAttribute("user"));
+            String username = user.getUsrName();
             String _username = username;
             String value = "resource/" + username;
             user.setPortrait(value);
@@ -87,11 +87,11 @@ public class FileManager {
                         value += suffix;
                         System.out.println(value);
                         File newFile = new File(path + username);
-                        User olduser= new User();
+                        Users olduser= new Users();
                         try {  
                             fileItem.write(newFile);
                             userTransaction.begin();
-                            olduser = entityManager.find(User.class, user.getUsr_id());
+                            olduser = entityManager.find(Users.class, user.getUsrId());
                             olduser.setPortrait(value);
                             entityManager.merge(olduser);
                             userTransaction.commit();
