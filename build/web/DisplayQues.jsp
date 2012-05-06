@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.gtx.Quesdisplay" %>
 
 <link rel="stylesheet" href="qandstyle.css" type="text/css">
 <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
@@ -29,18 +30,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Temp display</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <div class="news-container" style="width: 260px; margin: auto;">
-<ul>
-	<li style="height:40px"><a href="#">这是新闻标题1</a><br /></li>
-	<li style="height:40px"><a href="#">新闻2</a><br /></li>
-	<li style="height:40px"><a href="#">新闻3</a><br /></li>
-	<li style="height:40px"><a href="#">新闻4</a><br /></li>
-	<li style="height:40px"><a href="#">新闻5</a><br /></li>
-</ul>
-</div>
+        <h1>Questions</h1>
+        <div class="news-container" style="width: 320px; margin: auto;">
+        <ul>
+            <c:forEach var="oneques" items="${quesli}">
+                <li style="height: 80px">
+                    <div class="questionblock" style="width: 290px; height: 60px">
+                    <a href="QuesFromDB?quesID=${oneques.getQuesID()}">${oneques.getContent()}</a>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+        </div>
     </body>
 </html>
