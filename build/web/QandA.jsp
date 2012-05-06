@@ -152,6 +152,12 @@
                 <p>在<jsp:getProperty name="theques" property="date"/></p>
             </div>
             <hr class="hr1">
+            <div>
+                <c:forEach var="onetag" items="${tag}">
+                    <span id="tag">${onetag.getTag()}</span>
+                </c:forEach>
+            </div>
+            <hr class="hr1">
             <div class="socrecontrol">
                 <button id="queaddscore" value="${theques.getQuesID()}">加1分</button>
                 <button id="quedescore" value="${theques.getQuesID()}">减1分</button>

@@ -6,15 +6,14 @@ package com.gtx.servlet;
 
 import com.entity.Questions;
 import com.entity.Answers;
+import com.entity.Tag;
 import com.entity.Users;
 import com.gtx.Ansdisplay;
 import com.gtx.Quesdisplay;
+import com.gtx.Tagdisplay;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -56,7 +55,9 @@ public class QuesFromDB extends HttpServlet {
             Questions question = null;
             Users user = null;
             Set<Answers> answers = null;
+            Collection tags = null;
             List ansdis = new ArrayList();
+            List tagdis = new ArrayList();
 
             EntityManager entityManager = entityManagerFactory.createEntityManager();
             try
@@ -78,6 +79,15 @@ public class QuesFromDB extends HttpServlet {
                     ans.setTheuser(ansuser);
                     ansdis.add(ans);
                 }
+                tags = question.getTags();
+                Iterator tagit = tags.iterator();
+                while(tagit.hasNext())
+                {
+                    Tagdisplay t = new Tagdisplay();
+                    t.setThetag((Tag)tagit.next());
+                    System.out.println(t.getTag());
+                    tagdis.add(t);
+                }
                 userTransaction.commit();
             }
             catch(Exception e)
@@ -96,6 +106,7 @@ public class QuesFromDB extends HttpServlet {
             ansSort(ansdis);
             request.setAttribute("theques", quesdisplay);
             request.setAttribute("answers", ansdis);            
+            request.setAttribute("tag", tagdis);
             
             request.getRequestDispatcher("QandA.jsp").forward(request, response);
     }

@@ -30,7 +30,7 @@ public class Answers implements Serializable {
     @Lob
     @Column(name = "content")
     private byte[] content;
-    @Basic(optional = false)
+    @Basic(optional =     false)
     @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)

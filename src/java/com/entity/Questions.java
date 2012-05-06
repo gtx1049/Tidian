@@ -6,6 +6,7 @@ package com.entity;
 
 import com.entity.Answers;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
@@ -26,7 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Questions.findByUsrId", query = "SELECT q FROM Questions q WHERE q.usrId = :usrId"),
     @NamedQuery(name = "Questions.findByCategory", query = "SELECT q FROM Questions q WHERE q.category = :category"),
     @NamedQuery(name = "Questions.findBySubject", query = "SELECT q FROM Questions q WHERE q.subject = :subject"),
-    @NamedQuery(name = "Questions.findByTagid", query = "SELECT q FROM Questions q WHERE q.tagid = :tagid"),
     @NamedQuery(name = "Questions.findByPoint", query = "SELECT q FROM Questions q WHERE q.point = :point"),
     @NamedQuery(name = "Questions.findByCollectNumber", query = "SELECT q FROM Questions q WHERE q.collectNumber = :collectNumber"),
     @NamedQuery(name = "Questions.findByDate", query = "SELECT q FROM Questions q WHERE q.date = :date"),
@@ -63,8 +63,6 @@ public class Questions implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "subject")
     private String subject;
-    @Column(name = "tagid")
-    private Integer tagid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "point")
@@ -80,6 +78,11 @@ public class Questions implements Serializable {
     private String status;
     @OneToMany(mappedBy = "question")
     private Set<Answers> answer;
+    @ManyToMany
+    @JoinTable(name = "que_tag", joinColumns = @JoinColumn(name = "que_id",
+            referencedColumnName = "que_id"), inverseJoinColumns = @JoinColumn(name = "tagid",
+            referencedColumnName = "tagid"))
+    private Collection<Tag> tags;
     
     public Questions() {
     }
@@ -130,14 +133,6 @@ public class Questions implements Serializable {
 
     public void setSubject(String subject) {
         this.subject = subject;
-    }
-
-    public Integer getTagid() {
-        return tagid;
-    }
-
-    public void setTagid(Integer tagid) {
-        this.tagid = tagid;
     }
 
     public int getPoint() {
@@ -191,6 +186,14 @@ public class Questions implements Serializable {
     public void setAnswers(Set<Answers> answers)
     {
         this.answer = answers;
+    }
+
+    public Collection<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Collection<Tag> tags) {
+        this.tags = tags;
     }
     
     @Override

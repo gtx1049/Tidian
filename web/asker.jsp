@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="qandstyle.css" type="text/css">
@@ -22,15 +24,16 @@
             $(this).toggleClass("active");
             return false;
         })
-        $("#button_ok").click(function()
+        $("#button_ok").click(function(check)
         {           
-            //if($("#editor_id").val() == "")
-            //    {
-            //        alert("内容不能为空！");
-            //        return false;
-            //    }
+            var text = EditorObject.html();
+            if(text == "")
+            {
+                alert("你没输入任何内容！");
+                check.preventDefault();
+            }
         })
-        var editor = KindEditor.create('textarea[name="content"]', 
+         window.EditorObject = KindEditor.create('textarea[name="content"]', 
          {
                                                 fontSizeTable : '18x',
               					resizeType : 0,
@@ -40,6 +43,30 @@
 						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
          });
     })
+    function ajaxAddtag()
+    {
+        var newtag = document.getElementById("newtag").value;
+        if(newtag != "")
+        {
+            $.get("Dealtag", {newtag: newtag}, function(data)
+            {
+                data = decodeURI(data);
+                
+                var stall = [];
+                stall = data.split("|");
+                alert(stall[0]);
+                document.getElementById("tagselect").innerHTML += ("<option value=" + stall[1] + ">" + stall[0] + "</option>");
+            });
+            
+            return false;
+        }
+        else
+        {
+            alert("没有内容！");
+            
+            return false;
+        }
+    }
 </script>
 
 <html>
@@ -77,6 +104,14 @@
                     <input type="radio" name="qtype" value="select" id="defaultchoose"/>选择
                     <input type="radio" name="qtype" value="blank"/>填空
                     <input type="radio" name="qtype" value="anwser"/>解答
+                    
+                    <select name="tag" id="tagselect">
+                        <c:forEach var="onetag" items="${taglist}">
+                            <option value="${onetag.getTagid()}">${onetag.getTag()}</option>
+                        </c:forEach>
+                    </select>
+                    <input id="newtag" type="text">
+                    <button id="addtag" onclick="return ajaxAddtag();">新增标签</button>
                 </div>
                 <div>  
                     <button id="button_ok">OK</button>

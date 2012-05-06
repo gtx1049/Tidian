@@ -4,32 +4,31 @@
  */
 package com.gtx.servlet;
 
-import com.entity.Questions;
 import com.entity.Tag;
-import com.entity.Users;
-import com.gtx.Dealuser;
-import com.gtx.Quesdisplay;
+import com.gtx.Tagdisplay;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Administrator
  */
-public class EditHandle extends HttpServlet {
+@WebServlet(name = "SetTag", urlPatterns = {"/SetTag"})
+public class SetTag extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -41,6 +40,7 @@ public class EditHandle extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @PersistenceUnit(unitName="TidianPU")
     private EntityManagerFactory entityManagerFactory;
     
@@ -49,6 +49,31 @@ public class EditHandle extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setCharacterEncoding("UTF-8");
+        List li = null;
+        List lidis = new ArrayList();
+        EntityManager entitymanager = entityManagerFactory.createEntityManager();
+        try
+        {
+            userTransaction.begin();
+            Query query = entitymanager.createQuery("select t from Tag t");
+            li = query.getResultList();
+            userTransaction.commit();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        Iterator it = li.iterator();
+        while(it.hasNext())
+        {
+            Tagdisplay tagdis = new Tagdisplay();
+            tagdis.setThetag((Tag)it.next());
+            lidis.add(tagdis);
+        }
+        request.setAttribute("taglist", lidis);
+        request.getRequestDispatcher("asker.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +89,7 @@ public class EditHandle extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -79,60 +104,7 @@ public class EditHandle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession usersession = request.getSession();
-        //class to jugde user
-        Dealuser dealuser = new Dealuser(usersession);
-        int userid = dealuser.judgeUser();
-        
-        request.setCharacterEncoding("UTF-8");
-        String htmlData = request.getParameter("content") != null ? request.getParameter("content") : "";
-        String grade = request.getParameter("grade");
-        String subject = request.getParameter("subject");
-        String cateloge = request.getParameter("qtype");
-        String tagid = request.getParameter("tag");
-        
-        if(htmlData.length() == 0)
-        {
-            return;
-        }
-        
-        Users theuser = null;
-        Questions newques = null;
-        newques = new Questions();
-        newques.setContent(htmlData.getBytes());      
-        newques.setPoint(0);
-        newques.setCategory(cateloge);
-        newques.setSubject(grade + subject);
-        newques.setUsrId(userid);
-        newques.setCollectNumber(0);
-        newques.setDate(new Date());
-        newques.setQueId(0);
-        newques.setStatus("norm");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-            try
-            {
-                userTransaction.begin();
-                theuser = entityManager.find(Users.class, userid);
-                entityManager.refresh(theuser);
-                Tag atag = entityManager.find(Tag.class, Integer.parseInt(tagid));
-
-                Collection<Tag> tags = new ArrayList<Tag>();
-                tags.add(atag);
-                newques.setTags(tags);
-                entityManager.persist(newques);
-                userTransaction.commit();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        
-        Quesdisplay quesdisplay = new Quesdisplay();
-        quesdisplay.setQuestion(newques);
-        quesdisplay.setTheuser(theuser);
-        request.setAttribute("theques", quesdisplay);
-        request.getRequestDispatcher("QandA.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -144,5 +116,4 @@ public class EditHandle extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
 }

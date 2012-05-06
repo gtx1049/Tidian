@@ -9,6 +9,7 @@ import com.gtx.Quesdisplay;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -53,7 +54,8 @@ public class QuesToindex extends HttpServlet {
         try
         {
             userTransaction.begin();
-            Query query = (Query)entitymanager.createQuery("select q from Questions q order by q.usrId asc");
+            Query query = (Query)entitymanager.createQuery("select q from Questions q order by q.usrId desc");
+            query.setFirstResult(query.getResultList().size() - 5);            
             query.setMaxResults(5);
             li = query.getResultList();
             userTransaction.commit();
@@ -63,10 +65,11 @@ public class QuesToindex extends HttpServlet {
             e.printStackTrace();
         }
         List displayli = new ArrayList();
-        for(int i = 0; i < li.size(); i++)
+        Iterator<Questions> it = li.iterator();
+        while(it.hasNext())
         {
             Quesdisplay ques = new Quesdisplay();
-            ques.setQuestion(li.get(i));            
+            ques.setQuestion(it.next());            
             displayli.add(ques);            
         }
         
