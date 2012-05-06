@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.UserTransaction;
 import org.apache.tomcat.util.http.fileupload.FileItem;
@@ -34,9 +35,14 @@ public class FileManager {
         ServletRequestContext requestContext = new ServletRequestContext(request);
         
         if (FileUpload.isMultipartContent(requestContext)) {  
-  
+            
             DiskFileItemFactory factory = new DiskFileItemFactory();
-            String path = "D:/";
+           
+             ServletContext s1=request.getServletContext(); 
+             String path=s1.getRealPath("/");
+             path +="resource/";
+             path = path.replaceAll("\\\\", "/");
+             System.out.println(path);
             Users user = (Users)(request.getSession().getAttribute("user"));
             String username = user.getUsrName();
             String _username = username;
