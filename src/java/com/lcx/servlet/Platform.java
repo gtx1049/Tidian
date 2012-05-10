@@ -21,7 +21,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,26 +52,24 @@ public class Platform extends HttpServlet {
             throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-
-//        String spage = request.getParameter("page");
-//        int page = 0;
-//        if(spage != null){
-//            page = Integer.parseInt(spage);
-//        }
-//        EntityManager entityManager = entityManagerFactory.createEntityManager(); 
-//        PlatformManager platformManager = new PlatformManager(entityManager);
-//        int pla_size = platformManager.getSize();
-//        List<Platforms> platforms = platformManager.getSpecifyPlatforms(page);
-//        List<Platforms> com_platforms = platformManager.getByComment();
-//        List<Platforms> fav_platforms = platformManager.getByFavorite();
-//  
-//        request.setAttribute("com_platforms", com_platforms);
-//        request.setAttribute("fav_platforms", fav_platforms);
-//        request.setAttribute("platforms", platforms);
-//        request.setAttribute("pla_size", pla_size);
-//        request.setAttribute("cpage", page);
-//        request.getRequestDispatcher("/platform.jsp").forward(request, response);
+        String spage = request.getParameter("page");
+        int page = 0;
+        if(spage != null){
+            page = Integer.parseInt(spage);
+        }
+        EntityManager entityManager = entityManagerFactory.createEntityManager(); 
+        PlatformManager platformManager = new PlatformManager(entityManager);
+        int pla_size = platformManager.getSize();
+        List<Platforms> platforms = platformManager.getSpecifyPlatforms(page,40);
+        List<Platforms> com_platforms = platformManager.getByComment();
+        List<Platforms> fav_platforms = platformManager.getByFavorite();
+  
+        request.setAttribute("com_platforms", com_platforms);
+        request.setAttribute("fav_platforms", fav_platforms);
+        request.setAttribute("platforms", platforms);
+        request.setAttribute("pla_size", pla_size);
+        request.setAttribute("cpage", page);
+        request.getRequestDispatcher("/platform.jsp").forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

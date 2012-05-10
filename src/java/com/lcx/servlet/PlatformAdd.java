@@ -46,11 +46,16 @@ public class PlatformAdd extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        if(request.getSession().getAttribute("user")==null){
+            response.sendRedirect("login.html");
+            return;
+        }
         request.setCharacterEncoding("UTF-8");
         try{
             userTransaction.begin();
             String topic = request.getParameter("topic");
             String content = request.getParameter("content");
+           
             Date date = new Date();           
             out.println(date.toString().substring(3, 10));
             out.println("<br/>");
@@ -60,15 +65,18 @@ public class PlatformAdd extends HttpServlet {
             out.println(now);
             Platforms newPlatform = new Platforms(1);
             Users user = (Users) request.getSession().getAttribute("user");
-            newPlatform.setUsrId(1);
+            if(user == null){
+                response.sendRedirect("Login");
+            }
+            newPlatform.setUsrId(user);
             newPlatform.setTopic(topic);
-            newPlatform.setContent(content);
+            newPlatform.setContent(content.getBytes());
             newPlatform.setDate(new Date());
             newPlatform.setLastDate(new Date());
             newPlatform.setClickNumber(0);
             newPlatform.setFavNumber(0);            
             newPlatform.setCommentNumber(0);
-            newPlatform.setStatus("yew");
+            newPlatform.setStatus("yes");
             
             EntityManager entityManager = entityManagerFactory.createEntityManager();
             entityManager.persist(newPlatform);

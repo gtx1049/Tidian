@@ -60,8 +60,12 @@ public class PersonCenter extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Users kobe = entityManager.find(Users.class, 1);
-        
+       // Users kobe = entityManager.find(Users.class, 1);
+        Users kobe = (Users) request.getSession().getAttribute("user");
+        if(kobe==null){
+            response.sendRedirect("login.html");
+            return;          
+        }
         String spage = request.getParameter("page");
         int page = 0;
         if(spage!=null){
@@ -91,7 +95,7 @@ public class PersonCenter extends HttpServlet {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("user", kobe);
+       // session.setAttribute("user", kobe);
         session.setAttribute("art_number", art_number);
         request.setAttribute("articles", articles);
         request.setAttribute("materials", materials);
@@ -100,7 +104,8 @@ public class PersonCenter extends HttpServlet {
 
         out.println(questions.size());
         session.setAttribute("question_number", question_number);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        out.println(kobe.getPortrait());
+        request.getRequestDispatcher("/person_center.jsp").forward(request, response);
        // response.sendRedirect("index.jsp");
     }
 

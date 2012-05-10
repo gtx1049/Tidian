@@ -1,131 +1,148 @@
+<%-- 
+    Document   : index
+    Created on : 2012-5-8, 15:36:01
+    Author     : Administrator
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="com.entity.Articles"%>
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="user" class="com.entity.Users" scope="session"/>
 <!DOCTYPE html>
-
 <html>
-    <head>
+	<head>
 		<title>题典网</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-		<meta name="description" content="个人中心，你在题典网的家">
-		<link rel="stylesheet" type="text/css"  href="person_center.css" />
+		<meta name="description" content="中学生学生交流平台，使你的学习变得更加愉快高效">
+		<link rel="stylesheet" type="text/css"  href="index.css" />
 		<script type="text/javascript" src="index.js"></script>
+                <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+                <script charset="utf-8" src="kindeditor-min.js"></script>  
+                <script charset="utf-8" src="lang/zh_CN.js"></script>  
+                <script type="text/javascript" src="jquery.vticker-min.js"></script>
 	</head>
-	<body>
-		<div id="header">
-		
-		</div>
-		
-		<div id="middle">
-			<div class="logo">                          
-				<a href=""><jsp:getProperty name="user" property="usrName"/>的空间</a>
-			</div>
-			<div class="select">
-				<ul>
-                                    <li><a href="#" id="person_index"  onclick="_Onclick();return false;">个人主页</a></li>
-					<li><a href="#">个人信息</a></li>
-				</ul>
-			</div>
-		</div>
-			
-		<div id="navigation">
-			<div class="up">
-				<img id="portrait" src="<jsp:getProperty name="user" property="portrait"/>"></img><br/><br/>
-				<form action="FileUploadServlet" enctype="multipart/form-data" method="post">
-                                    <input type="file" name="myfile" size="1" maxlength="15"  /><br/>
-                                    <input type="submit" value="确认"/>
+	<body >
+		<div id="header_top">		
+			<span class="header_welcome">${user.getNickname()} 欢迎来到题典网</span>
+                        <c:choose>
+                        <c:when test="${user == null}">	
+				<form class="form" method="post" action="Log">				
+                                    <select name="login" id="login">
+                                        <option value="username">用户名</option>
+                                        <option value="uid">Email</option>
+                                    </select>
+                                    <input type="text" name="username" id="username" autocomplete="off"/>
+								
+                                    <span>密码</span>&nbsp<input type="password" name="password" id="password"/>
+                                    <input name="submit" type="submit" value="确定"/>
                                 </form>
-				<a href="">修改资料</a>
-			</div>
-
-			<div>
-				<ul>
-					<li><a href="#" id="2" onclick="Onclick(this); return false;">我的题库</a></li>
-					<li><a href="#" id="3" onclick="Onclick(this); return false;">喜爱文章</a></li>
-					<li><a href="#" id="4" onclick="Onclick(this); return false;">收藏资料</a></li>
-					<li><a href="#" id="5" onclick="Onclick(this); return false;">为我推荐</a></li>
-				</ul>
-			</div>
+                        </c:when>
+                            <c:when test="${user != null}">
+                                <form class="_form" method="post" action="Log">                            
+                                    <input name="submit" type="submit" value="安全退出"/>
+                                </form>
+                            </c:when>
+                        </c:choose>
+				<a href="Register.html" id="top1">注册</a>
+				<a href="" id="top2">忘记密码</a>
+		</div>
+		<div id="header_middle" >
+				<img  src="head_picture.jpg" class="header_picture"/>
+				
+		</div>
+		<div id="header_bottom">
+			<ul >
+				<li id="picture7"><a onmouseover="over(this);" onmouseout="out(this);" id="p7" href="">神级功能</a></li>
+				<li id="picture6"><a onmouseover="over(this);" onmouseout="out(this);" id="p6" href="person_center">个人中心</a></li>
+				<li id="picture5"><a onmouseover="over(this);" onmouseout="out(this);" id="p5" href="Platform">灌水论坛</a></li>
+				<li id="picture4"><a onmouseover="over(this);" onmouseout="out(this);" id="p4" href="">答疑解惑</a></li>
+				<li id="picture3"><a onmouseover="over(this);" onmouseout="out(this);" id="p3" href="blogServlet?page=1">经验分享</a></li>
+				<li id="picture2"><a onmouseover="over(this);" onmouseout="out(this);" id="p2" href="">资料下载</a></li>
+				<li id="picture1"><a onmouseover="over(this);" onmouseout="out(this);" id="p1" href="IndexControl">首页</a></li>			
+			</ul>
 		</div>
 
-		
-		<div id="content">
-			<div id="welcome" class="dis">
-				welcome page
-			</div>
-			<div id="questions" class="undis">
-                            <div class="qdescription">
-                                <c:out value="${personQuestions.getPqName()}">
-                                </c:out>
-                            </div>
-       
-                            <div  class="question">
-                                <ul>
-                                <c:forEach var="question" items="${questions}">
-                                    <li><a href="">${question.getTopic()}</a></li>
-                                </c:forEach>                               
-                                </ul>
-                                 <%                            
-                                    Integer question_number = (Integer)session.getAttribute("question_number");                                                                        
-                                    int _current = 1;     
-                                    out.println("<div class='selectPage'>");                                                                                                     
-                                    while(question_number>0){                                        
-                                        out.println("<a href='person_center?qpage=");
-                                        out.println(_current);
-                                        out.println("'>");
-                                        out.println(_current++);
-                                        out.println("</a>");
-                                        question_number = question_number - 1;
-                                        
-                                    }                                    
-                                    out.println("</div>");
-                                %>
-                            </div>
-
-
-			</div>
-
-			<div id="articles" class="undis">
-                            <span id="d">articles</span>
-                                <ul>
-                                <c:forEach var="article" items="${articles}">
-                                    <li><a href="">${article.getTopic()}</a></li>
-   
-                                </c:forEach>                               
-                                </ul>
-                                <%
-                                    Integer art_number = (Integer)session.getAttribute("art_number");                                                                        
-                                    int current = 1;     
-                                    out.println("<div class='selectPage'>");                                                                                                     
-                                    while(art_number>0){                                        
-                                        out.println("<a href='person_center?page=");
-                                        out.println(current-1);
-                                        out.println("'>");
-                                        out.println(current++);
-                                        out.println("</a>");
-                                        art_number = art_number - 10;
-                                        
-                                    }                                    
-                                    out.println("</div>");
-                                %>
-			</div>
-			
-			<div id="materials" class="undis">
-				materials
-                                <ul>
-                                <c:forEach var="material" items="${materials}">
-                                    <li><a href="">${material.getMatId()}</a></li>
-                                </c:forEach>
-                                </ul>
-			</div>
-			
-			<div id="recommendations" class="undis">
-				recommendations
-			</div>
+		<div id="question_wall">
+                    <c:import url="DisplayQues.jsp"/>
 		</div>
-		<hr/>
+		<div id="question_search">
+                    question_search
+                    
+		</div>
+		<div id="platform">
+			<p>灌水论坛专区</p>
+                        <ul>
+                            <c:forEach var="platform" items="${index_platforms}">
+                                <li class="platfor"><a href="FindPlatform?pla_id=${platform.getPlaId()}">${platform.getTopic()}</a></li>
+                            </c:forEach>
+                        </ul>
+		</div>
+		<div id="experience">
+			experience
+		</div>
+		<div id="material">
+			<ul>
+				<li  id="mat_chinese"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="1" href="#">语文</a></li>
+				<li id="mat_math"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="2" href="#">数学</a></li>
+				<li id="mat_english"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="3" href="#">英语</a></li>
+				<li id="mat_physics"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="4" href="#">物理</a></li>
+				<li id="mat_chemistry"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="5" href="#">化学</a></li>
+				<li id="mat_biology"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="6" href="#">生物</a></li>
+				<li id="mat_politics"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="7" href="#">政治</a></li>
+				<li id="mat_history"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="8" href="#">历史</a></li>
+				<li id="mat_geography"><a onclick="Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="9" href="#">地理</a></li>
+			</ul>
+		<div class="dis">
+		语文
+		</div>
+		<div class="undis">
+		数学
+		</div>
+		<div class="undis">
+		英语
+		</div>
+		<div class="undis">
+		物理
+		</div>
+		<div class="undis">
+		化学
+		</div>
+		<div class="undis">
+		生物
+		</div>
+		<div class="undis">
+		政治		
+		</div>
+		<div class="undis">
+		历史
+		</div>
+		<div class="undis">
+		地理
+		</div>
+		</div>
+		<div id="recommand">
+			<ul>
+				<li  id="rec_question"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="11" href="#">问题</a></li>
+				<li id="rec_experience"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="12" href="#">经验</a></li>
+				<li id="rec_platform"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="13" href="#">论坛</a></li>
+				<li id="rec_material"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="14" href="#">资料</a></li>
+			</ul>
+				<div class="_dis">
+					问题
+				</div>
+				<div class="_undis">
+					经验
+				</div>
+				<div class="_undis">
+					论坛
+                                        
+				</div>
+				<div class="_undis">
+					资料
+				</div>
+			
+		</div>
+
+		<div id="question">
+                    <c:import url="asker.jsp"/>
+		</div>
+                    <c:import url="bottom.jsp"/>
 	</body>
 </html>

@@ -1,10 +1,8 @@
-package com.entity;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package com.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -33,20 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByBirthday", query = "SELECT u FROM Users u WHERE u.birthday = :birthday"),
     @NamedQuery(name = "Users.findBySex", query = "SELECT u FROM Users u WHERE u.sex = :sex"),
     @NamedQuery(name = "Users.findByExperience", query = "SELECT u FROM Users u WHERE u.experience = :experience"),
+    @NamedQuery(name = "Users.findByPortrait", query = "SELECT u FROM Users u WHERE u.portrait = :portrait"),
     @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status")})
 public class Users implements Serializable {
-    @Basic(optional =     false)
-    @NotNull
-    @Column(name = "birthday")
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
-    private Collection<PersonQuestions> personQuestionsCollection;
-    @Size(max = 96)
-    @Column(name = "portrait")
-    private String portrait;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
-    private Collection<PersonArticles> personArticlesCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +48,7 @@ public class Users implements Serializable {
     private String usrName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 16)
+    @Size(min = 1, max = 36)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="电子邮件无效")//if the field contains email address consider using this annotation to enforce field validation
@@ -82,6 +69,11 @@ public class Users implements Serializable {
     private String province;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 4)
     @Column(name = "sex")
     private String sex;
@@ -89,11 +81,20 @@ public class Users implements Serializable {
     @NotNull
     @Column(name = "experience")
     private int experience;
+    @Size(max = 96)
+    @Column(name = "portrait")
+    private String portrait;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 4)
     @Column(name = "status")
     private String status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<PersonQuestions> personQuestionsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private Collection<PersonArticles> personArticlesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<Platforms> platformsCollection;
 
     public Users() {
     }
@@ -163,6 +164,14 @@ public class Users implements Serializable {
         this.province = province;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -179,12 +188,47 @@ public class Users implements Serializable {
         this.experience = experience;
     }
 
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
+    }
+
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @XmlTransient
+    public Collection<PersonQuestions> getPersonQuestionsCollection() {
+        return personQuestionsCollection;
+    }
+
+    public void setPersonQuestionsCollection(Collection<PersonQuestions> personQuestionsCollection) {
+        this.personQuestionsCollection = personQuestionsCollection;
+    }
+
+    @XmlTransient
+    public Collection<PersonArticles> getPersonArticlesCollection() {
+        return personArticlesCollection;
+    }
+
+    public void setPersonArticlesCollection(Collection<PersonArticles> personArticlesCollection) {
+        this.personArticlesCollection = personArticlesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Platforms> getPlatformsCollection() {
+        return platformsCollection;
+    }
+
+    public void setPlatformsCollection(Collection<Platforms> platformsCollection) {
+        this.platformsCollection = platformsCollection;
     }
 
     @Override
@@ -209,41 +253,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gtx.Users[ usrId=" + usrId + " ]";
-    }
-
-    public String getPortrait() {
-        return portrait;
-    }
-
-    public void setPortrait(String portrait) {
-        this.portrait = portrait;
-    }
-
-    @XmlTransient
-    public Collection<PersonArticles> getPersonArticlesCollection() {
-        return personArticlesCollection;
-    }
-
-    public void setPersonArticlesCollection(Collection<PersonArticles> personArticlesCollection) {
-        this.personArticlesCollection = personArticlesCollection;
-    }
-
-    @XmlTransient
-    public Collection<PersonQuestions> getPersonQuestionsCollection() {
-        return personQuestionsCollection;
-    }
-
-    public void setPersonQuestionsCollection(Collection<PersonQuestions> personQuestionsCollection) {
-        this.personQuestionsCollection = personQuestionsCollection;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+        return "com.entity.Users[ usrId=" + usrId + " ]";
     }
     
 }

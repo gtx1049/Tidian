@@ -39,11 +39,12 @@ body{
 	float:left;
 }
 .logo a{ 
-	color:white;
+        color:white;
 	font-weight:700;
 	font-size:24px;
 	text-decoration: none;
         outline:none;
+        text-shadow: 5px 5px 5px black;
 }
 #navigation{
 	float:left;
@@ -94,7 +95,10 @@ body{
 	height:380px;
 	margin-left:400px;
 	margin-top:30px;
-	border:1px solid grey;
+	border:1px solid  #a1a1a1;
+        border-radius:10px;
+        -moz-border-radius:25px;
+        
 }
 .question{
     width:400px;
@@ -102,6 +106,7 @@ body{
     border:1px solid grey;
     margin-top: 40px;
     margin-left: 50px;
+    box-shadow: 5px 5px 2px #888888;
 }
 .qdescription{
     height:300px;
@@ -109,6 +114,7 @@ body{
     margin-right: 50px;
     float:right;
     border:1px solid grey;
+    box-shadow: 5px 5px 2px #888888;
 }
 hr{
 	margin-top:40px;
@@ -127,4 +133,11 @@ hr{
 #portrait{
 	height:150px;
 	width:120px;
+}
+#welcome p{
+    text-align: center;
+}
+h1{
+   text-shadow: 5px 5px 5px #FF0000;
+   margin-left: 600px;
 }

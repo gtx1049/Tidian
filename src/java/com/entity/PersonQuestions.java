@@ -5,13 +5,11 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,13 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PersonQuestions.findBySetTime", query = "SELECT p FROM PersonQuestions p WHERE p.setTime = :setTime"),
     @NamedQuery(name = "PersonQuestions.findByRank", query = "SELECT p FROM PersonQuestions p WHERE p.rank = :rank")})
 public class PersonQuestions implements Serializable {
-    @Basic(optional =     false)
-    @NotNull
-    @Column(name = "set_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date setTime;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personQuestions")
-    private Collection<PerQueContent> perQueContentCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +37,11 @@ public class PersonQuestions implements Serializable {
     @Size(min = 1, max = 16)
     @Column(name = "pq_name")
     private String pqName;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "set_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date setTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "rank")
@@ -131,15 +127,6 @@ public class PersonQuestions implements Serializable {
     @Override
     public String toString() {
         return "com.entity.PersonQuestions[ pqId=" + pqId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<PerQueContent> getPerQueContentCollection() {
-        return perQueContentCollection;
-    }
-
-    public void setPerQueContentCollection(Collection<PerQueContent> perQueContentCollection) {
-        this.perQueContentCollection = perQueContentCollection;
     }
     
 }

@@ -6,7 +6,6 @@ package com.lcx.model;
 
 
 import com.entity.Users;
-import com.sun.xml.internal.ws.client.RequestContext;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
@@ -47,14 +46,14 @@ public class FileManager {
             String username = user.getUsrName();
             String _username = username;
             String value = "resource/" + username;
-            user.setPortrait(value);
+            
             factory.setRepository(new File(path));  
             ServletFileUpload upload = new ServletFileUpload(factory);  
              upload.setHeaderEncoding("gbk");  
             upload.setSizeMax(2000000);  
             List items = new ArrayList();  
-            try {  
-                items = upload.parseRequest(request);  
+            try {
+                items = upload.parseRequest(request);
             } catch (FileUploadException e1) {  
                 System.out.println("文件上传发生错误" + e1.getMessage());  
             }  
@@ -97,6 +96,7 @@ public class FileManager {
                         try {  
                             fileItem.write(newFile);
                             userTransaction.begin();
+                            user.setPortrait(value);
                             olduser = entityManager.find(Users.class, user.getUsrId());
                             olduser.setPortrait(value);
                             entityManager.merge(olduser);

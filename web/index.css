@@ -1,0 +1,431 @@
+body{
+	width:1364px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#header_top{
+	height:22px;
+	margin-top:-7px;
+	background-color:#CFCFCF;
+	font-size:14px;
+}
+
+.header_welcome{
+	font-family:����;
+	font-size:16px;
+	margin-left:100px;
+	margin-top:1px;
+}
+#header_middle{
+	margin-left:180px;
+	margin-top:2px;
+	width:1020px;
+	height:200px;
+}
+.form{
+	margin-top:-20px;
+	margin-left:818px;
+}
+._form{
+    	margin-top:-20px;
+	margin-left:1130px;
+}
+#top1{
+	position:absolute;
+	left:1220px;
+	top:5px;
+}
+#top2{
+	position:absolute;
+	left:1270px;
+	top:5px;
+}
+#header_top a{
+	font-size:14px;
+	text-decoration: none;
+	color:#000000;
+}
+.header_picture{
+	width:1020px;
+	height:200px;
+}
+
+#header_bottom{
+	margin-top:2px;
+	height:33px;	
+	margin-left:180px;
+	width:1020px;
+}
+#header_bottom ul{
+	margin:0px;
+	line-height:33px;
+
+}
+
+#header_bottom ul li{
+	width:146px;
+	text-align:center;
+	height:31px;
+	display:inline;
+	list-style-type:none;
+}
+
+#header_bottom #picture1 a{
+	margin-left:-40px;
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	
+}
+
+
+#header_bottom  #picture2 a{
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	float:right;
+}
+#header_bottom  #picture3 a{
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	float:right;
+}
+#header_bottom  #picture4 a{
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	float:right;
+}
+#header_bottom  #picture5 a{
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	float:right;
+}
+#header_bottom  #picture6 a{
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	float:right;
+}
+#header_bottom  #picture7 a{
+	color:white;
+	width:146px;
+	outline:none;
+	display:block;
+	text-decoration: none;
+	background:url("./images/1.jpg") no-repeat;
+	float:right;
+}
+#username{
+	width:100px;
+}
+#password{
+	width:100px;
+}
+#question_wall{
+	margin-top:10px;
+	margin-right:164px;
+	border:1px solid grey;
+	width:770px;
+	height:250px;
+	float:right;
+                border-radius:10px;
+        -moz-border-radius:25px;
+}
+#question_search{
+	margin-left:180px;
+	margin-top:10px;
+	border:1px solid grey;
+	height:250px;
+	width:220px;
+        border-radius:10px;
+        -moz-border-radius:25px;
+}
+#platform{
+	margin-top:10px;
+	width:500px;
+	height:250px;
+	margin-right:164px;
+	border:1px solid grey;
+	float:right;
+        border-radius:10px;
+        -moz-border-radius:25px;
+
+}
+.platfor{
+        font-size: 16px;
+        width: 420px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 23px;
+        list-style-type:square;
+}
+.platfor a{
+    color:blue;
+    text-decoration: none;
+}
+#experience{
+	margin-top:10px;
+	width:500px;
+	height:250px;
+	margin-left:180px;
+	border:1px solid grey;
+        border-radius:10px;
+        -moz-border-radius:25px;
+}
+#recommand{
+	margin-top:10px;
+	width:500px;
+	height:250px;
+	margin-left:180px;
+	border:1px solid grey;
+                border-radius:10px;
+        -moz-border-radius:25px;
+}
+#recommand ul{
+	height:31px;
+	margin-left:0px;
+	margin-top:0px;
+}
+#recommand ul li{
+	display:inline;
+	list-style-type:none;
+}
+#material{
+	margin-top:10px;
+	width:500px;
+	height:250px;
+	margin-right:164px;
+	border:1px solid grey;
+	float:right;
+                border-radius:10px;
+        -moz-border-radius:25px;
+}
+#material ul{
+	height:31px;	
+	margin-left:0px;
+	margin-top:0px;
+}
+#material ul li{
+	display:inline;
+	list-style-type:none;
+}
+#question{
+	width:1020px;
+	margin-left:180px;
+	margin-top:10px;
+	height:300px;
+}
+#mat_chinese a{
+	color:black;
+	padding:3px;
+	font-size:18px;
+	margin-left:-40px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_math a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+		width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_english a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+		width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_physics a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_chemistry a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_biology a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_politics a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_history a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+#mat_geography a{
+color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+.dis,._dis{
+	display:block;
+}
+.undis,._undis{
+	display:none;
+}
+
+#rec_question a{
+	margin-left:-40px;
+	color:black;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+
+#rec_experience a{
+	color:black;
+	padding:3px;
+	margin-left:-4px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+
+#rec_platform a{
+	color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}
+
+#rec_material a{
+	color:black;
+	margin-left:-4px;
+	padding:3px;
+	font-size:18px;
+	background:url("./images/11.jpg") no-repeat;	
+	display:block;
+	width:48px;
+	height:18px;
+	text-align:center;
+	text-decoration:none;
+	outline:none;
+	float:left;
+}

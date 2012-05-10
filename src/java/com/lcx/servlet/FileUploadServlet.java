@@ -62,8 +62,8 @@ public class FileUploadServlet extends HttpServlet {
             Logger.getLogger(FileUploadServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
          
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
-        //response.sendRedirect("/index.jsp");
+        //request.getRequestDispatcher("/person_center.jsp").forward(request, response);
+        response.sendRedirect("person_center");
 
         
     }

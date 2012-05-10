@@ -38,11 +38,11 @@ public class PlatformManager {
         List<Platforms> platforms = query.getResultList();
         return platforms;
     }
-    public List<Platforms> getSpecifyPlatforms(int page){
+    public List<Platforms> getSpecifyPlatforms(int page,int amount){
         String sql = "select u from Platforms u order by u.lastDate desc";
         Query query = (Query) entityManager.createQuery(sql);
-        query.setFirstResult(page*40);
-        query.setMaxResults(40);
+        query.setFirstResult(page*amount);
+        query.setMaxResults(amount);
         List<Platforms> platforms = query.getResultList();
         return platforms;
     }

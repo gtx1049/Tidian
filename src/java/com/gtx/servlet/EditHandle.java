@@ -9,11 +9,13 @@ import com.entity.Tag;
 import com.entity.Users;
 import com.gtx.Dealuser;
 import com.gtx.Quesdisplay;
+import com.gtx.Tagdisplay;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -96,7 +98,7 @@ public class EditHandle extends HttpServlet {
         {
             return;
         }
-        
+        Tag atag = null;
         Users theuser = null;
         Questions newques = null;
         newques = new Questions();
@@ -115,7 +117,7 @@ public class EditHandle extends HttpServlet {
                 userTransaction.begin();
                 theuser = entityManager.find(Users.class, userid);
                 entityManager.refresh(theuser);
-                Tag atag = entityManager.find(Tag.class, Integer.parseInt(tagid));
+                atag = entityManager.find(Tag.class, Integer.parseInt(tagid));
 
                 Collection<Tag> tags = new ArrayList<Tag>();
                 tags.add(atag);
@@ -127,11 +129,16 @@ public class EditHandle extends HttpServlet {
             {
                 e.printStackTrace();
             }
-        
+        List tagdis = new ArrayList();
+        Tagdisplay tagdisplay = new Tagdisplay();
+        tagdisplay.setThetag(atag);
+        tagdis.add(tagdisplay);
+         
         Quesdisplay quesdisplay = new Quesdisplay();
         quesdisplay.setQuestion(newques);
         quesdisplay.setTheuser(theuser);
         request.setAttribute("theques", quesdisplay);
+        request.setAttribute("tag", tagdis);
         request.getRequestDispatcher("QandA.jsp").forward(request, response);
     }
 

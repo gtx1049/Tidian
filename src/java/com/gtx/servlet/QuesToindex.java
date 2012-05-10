@@ -55,7 +55,14 @@ public class QuesToindex extends HttpServlet {
         {
             userTransaction.begin();
             Query query = (Query)entitymanager.createQuery("select q from Questions q order by q.usrId desc");
-            query.setFirstResult(query.getResultList().size() - 5);            
+            if(query.getResultList().size() < 5)//amend bug
+            {
+                query.setFirstResult(0);
+            }
+            else
+            {
+                query.setFirstResult(query.getResultList().size() - 5);            
+            }
             query.setMaxResults(5);
             li = query.getResultList();
             userTransaction.commit();

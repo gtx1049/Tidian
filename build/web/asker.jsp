@@ -9,11 +9,9 @@
 
 <!DOCTYPE html>
 
-<link rel="stylesheet" href="qandstyle.css" type="text/css">
+<link rel="stylesheet" href="asker.css" type="text/css">
 
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-<script charset="utf-8" src="kindeditor-min.js"></script>  
-<script charset="utf-8" src="lang/zh_CN.js"></script>  
+
 <script type="text/javascript">
     $(document).ready(function()
     {
@@ -69,13 +67,7 @@
     }
 </script>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>The Editor</h1>
+
         <hr class="hr0"/>
         <p class="slide"><a href="#" class="btn-slide active">我要出题</a></p>
         <div id="editorcontainer" style="display: none">  
@@ -118,5 +110,3 @@
                 </div>
             </form>
         </div>
-    </body>
-</html>

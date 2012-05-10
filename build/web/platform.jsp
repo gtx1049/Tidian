@@ -6,6 +6,24 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script charset="utf-8" src="kindeditor-min.js"></script>  
+<script charset="utf-8" src="lang/zh_CN.js"></script>  
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        var editor = KindEditor.create('textarea[name="content"]', 
+         {
+                                                
+              					resizeType : 0,
+                                                items : [
+						'forecolor', 'hilitecolor', 'bold', 'underline',
+						'removeformat', '|', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+                });
+    })
+</script>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,15 +40,13 @@
 		</div>
 		<div class="middle">
 			<ul class="right">
-				<li class="new"><a href="">发表新贴</a></li>
+				<li class="new"><a href="#deliever">发表新贴</a></li>
 			</ul>
 			<ul class="left">
 				<li class="main"><a href="">精品</a></li>
 				<li class="index"><a href="">首页</a></li>
-
 			</ul>
-
-
+                </div>
 		<div class="content">
 
 		<div class="rightside">
@@ -41,14 +57,15 @@
 			<span>评论数排行</span>
 			<div class="com_rank">
                             <c:forEach var="com_platform" items="${com_platforms}">
-                            <li><a href="">${com_platform.getTopic()}</a></li>
+                                <li class="_platform"><a href="FindPlatform?pla_id=${com_platform.getPlaId()}">${com_platform.getTopic()}</a></li>
                         </c:forEach>
 			</div>
 			<span>喜欢数排行</span>
 			<div class="fav_rank">
+                            
                             <c:forEach var="fav_platform" items="${fav_platforms}">
-                                <li><a href="">${fav_platform.getTopic()}</a></li>
-                        </c:forEach>
+                                <li class="_platform"><a href="FindPlatform?pla_id=${fav_platform.getPlaId()}">${fav_platform.getTopic()}</a></li>
+                            </c:forEach>
 			</div>
 		</div>
 		<div class="leftside">
@@ -61,19 +78,25 @@
                         <li>回复</li>
                         <li>标题</li>
                     </ul>
-
-                    <ul>
-                    <c:forEach var="platform" items="${platforms}">                        
+                        <ul>
+                        <c:forEach var="platform" items="${platforms}" varStatus="status">                        
                         <ul class="pla_inf_right">
-                            <li>${platform.getUsrId()}</li>
-                            <li>${platform.getLastDate().toString().substring(3, 10)}</li>
-                            
+                            <li class="author">${platform.getUsrId().getUsrName()}</li>
+                            <li class="reply_time">${platform.getLastDate().toString().substring(3, 10)}</li>                          
                         </ul>
                         <ul class="pla_inf_left">
-                            <li>${platform.getClickNumber()}</li>
-                            <li>${platform.getCommentNumber()}</li>
-                            <li><a href="enterpla?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
+                            <li class="click_number">${platform.getClickNumber()}</li>
+                            <li class="reply_number">${platform.getCommentNumber()}</li>
+                            <c:choose>
+                                <c:when test="${status.count%2==0}">
+                                    <li class="platform" class="platform1"><a href="FindPlatform?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
+                                </c:when>                                    
+                                <c:when test="${status.count%2!=0}">
+                                    <li class="platform" class="platform2"><a href="FindPlatform?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
+                                </c:when>
+                            </c:choose>
                         </ul>
+                            <hr/>
                     </c:forEach>
                     </ul>
                     <%
@@ -114,9 +137,7 @@
                                             out.println(cpage);
                                         out.println("'>");
                                         out.println("下一页");
-                                        out.println("</a>");
-                                        
-                                        
+                                        out.println("</a>");                                                                                
                                         out.println("<a href='Platform?page=");
                                         if(_pla_size%40==0)
                                             out.println(_pla_size/40-1);
@@ -129,13 +150,17 @@
                                 %>
                 </div>
 		</div>
+                <a name="deliever"/>
 		<div class="deliever">
 			<h4>发表新贴</h4>
                         <form action="Platform_add" method="post">
-                            <span>标题</span><input type="text" name="topic"/><br/>
-                            <span>内容</span><input type="text" name="content"/>
-                            <input type="submit"/>
+                            <span>标题</span><br/>
+                            <input type="text" name="topic" style="width: 800px;"/><br/>                            
+                            <span>内容</span>
+                            <textarea id="editor_id" name="content" style="width:800px;height:200px;"></textarea>                                
+                            <input class="submit" value=" " type="submit"/>
                         </form>
 		</div>
+                <c:import url="bottom.jsp"/>
 	</body>
 </html>

@@ -1,0 +1,305 @@
+/* 
+    Document   : blog
+    Created on : 2012-5-5, 14:30:07
+    Author     : nankonami
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root 
+{ 
+    display: block;
+}
+div#nav
+{
+    margin-top: 50px;
+    margin-left: 10%;
+    border: #f00 solid 1px;
+    height: 50px;
+    width: 80%;
+}
+div#nav_list
+{ 
+    float: left;
+    height:29px; 
+    padding:3px 0 0 0; 
+    margin-left: 225px;
+    margin-top: 10px;
+    color:#333; 
+    font-size:14px; 
+    width: 75%;
+    font-weight:bold;
+}
+div#nav_list a
+{
+    display:inline-block; 
+    height:22px; 
+    margin:0 10px; 
+    padding:0 0 0 18px;  
+    vertical-align:middle; 
+    line-height:22px;  
+    cursor:pointer;
+}
+div#nav_list a span
+{
+    display:inline-block; 
+    height:22px; 
+    padding:0 20px 0 0;
+}
+div#nav_list a.hover
+{
+    position:relative; 
+    z-index:999;  
+    color:#ca0000; 
+    text-decoration:none;
+}
+div#nav_list a.select
+{
+    position:relative; 
+    z-index:999;  
+    color:#ca0000; 
+    text-decoration:none;
+}
+div#main_content
+{
+    display: block;
+    margin-left: 10%;
+    width: 80%;
+}
+div#main_content:after
+{
+    content:"."; 
+    display:block; 
+    height:0; 
+    clear:both; 
+    visibility:hidden;
+}
+div#main_left
+{
+    float:left; 
+    width:180px; 
+    overflow:hidden; 
+    margin:0 10px 0 0;
+}
+div#side_nav
+{   
+    margin:10px 0 10px 1px; 
+    border: #e0e0e0 solid 1px;
+}
+div#side_nav ul
+{
+    
+}
+div#side_nav ul li
+{
+    height:36px; 
+    margin:0 10px; 
+    border-bottom:solid 1px #e0e0e0; 
+    font-size:14px;
+    line-height:36px; 
+    font-weight:bold;
+}
+div#side_nav ul li.select
+{
+    height: 36px;
+    border-bottom: none;
+    color: #f00;
+}
+div#side_nav ul li a
+{
+    display:block; 
+    height:36px; 
+    padding:0 0 0 34px; 
+    text-decoration:none;
+}
+div#side_nav ul li a span
+{
+    display: inline-block;
+    height: 36px;
+}
+div#main_center
+{
+    float:left; 
+    width:540px; 
+    overflow:hidden; 
+    margin:0 10px 0 0;
+}
+div#blog_command
+{
+    margin-top: 10px;
+}
+div#blog_command h3
+{
+    padding:0px; 
+    line-height:100%; 
+    border-bottom:solid 1px #C82329;
+}
+div#blog_command .tit
+{
+    display:inline-block; 
+    height:16px; 
+    padding:0px 34px 0px 20px; 
+    border-bottom:solid 1px #C82329;  
+    font-size:16px; 
+    color:#555; 
+}
+div#blog_command ul
+{
+    width: 530px;
+    padding: 10px 10px;
+}
+div#blog_command ul li
+{
+    width:255px; 
+    height:24px;  
+    display:inline-block; 
+    overflow:hidden;  
+    padding-left:7px; 
+    white-space:nowrap; 
+    text-overflow:ellipsis;
+    color: #f00;
+}
+div#blog_command ul li a
+{
+    height: 24px;
+    font-size: 15px;
+}
+div#sub_nav
+{
+    border-bottom: #e0e0e0 solid 1px;
+}
+div#blog_list
+{
+    margin:20px 0 20px 0;
+}
+div#blog_list h1
+{
+    margin:0 0 4px 0; 
+    background:none;  
+    font-size:15px;
+    overflow:hidden;
+}
+div#blog_list h1 a
+{
+    
+}
+div#blog_list h1 a.category
+{
+    margin: 0 0 0 4px; 
+    color: #8E2013;
+}
+div#blog_list dl
+{
+    display:block;  
+    margin:10px 0 6px 0;
+}
+div#blog_list dl dt
+{   
+    float: left;
+    width:54px; 
+    overflow:hidden; 
+    margin:0 10px 0 0; 
+}
+div#blog_list dl dt img
+{
+    width:50px; 
+    height:50px; 
+    padding:1px; 
+    border: #e0e0e0 solid 1px;
+}
+div#blog_list dl dd
+{   
+    width:496px; 
+    color:#666; 
+    font-size: 14px;
+    line-height:20px;
+}
+div#blog_list #about_info
+{
+    clear:both; 
+    height:27px; 
+    padding:0 6px; 
+    background:#eff6fb; 
+    line-height:27px;
+}
+div#blog_list #about_info a
+{
+    display:inline-block; 
+    height:27px; 
+    line-height:27px;
+}
+div#main_right
+{
+    float:left; 
+    width:220px; 
+    height: 200px;
+    overflow:hidden;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+div#main_right #hot_blog
+{ 
+    border:solid 1px #DDD;
+    background:#f1f5fa;
+    width: 220px;
+}
+div#main_right #hot_blog h2
+{
+    margin:0 0 4px 0; 
+    border-bottom:solid 1px #DDD; 
+    font:bold 12px/30px Arial, Helvetica, sans-serif;
+}
+div#main_right .list_2
+{
+    
+}
+div#main_right .list_2 li
+{   
+    width: 180px;
+    font-size: 14px;
+    padding:0 0 0 -10px;
+}
+div#page_nav
+{
+    clear:both; 
+    padding:15px 0; 
+    color:#666; 
+    font:normal 12px/24px Arial; 
+    text-align:center;
+}
+div#page_nav a
+{
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 15px;
+    height:22px; 
+    padding:0 8px; 
+    border:solid 1px #dbe5ee; 
+    -moz-border-radius:2px; 
+    -webkit-border-radius:2px; 
+    -khtml-border-radius:2px; 
+    border-radius:2px; 
+    background:#fff; 
+    color:#333;  
+    cursor:pointer;
+}
+div#page_nav strong
+{   
+    display: inline-block;
+    font-size: 15px;
+    height:22px; 
+    padding:0 8px; 
+    border:solid 1px #dbe5ee; 
+    -moz-border-radius:2px; 
+    -webkit-border-radius:2px; 
+    -khtml-border-radius:2px; 
+    border-radius:2px; 
+    background:#fff; 
+    color:#333;  
+    cursor:pointer;
+}
+div#page_nav span
+{
+    font-size: 15px;
+    margin-right: 5px;
+}

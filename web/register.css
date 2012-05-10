@@ -1,0 +1,237 @@
+/* 
+    Document   : register
+    Created on : 2012-4-10, 0:19:45
+    Author     : nankonami
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body {
+    margin: 0 auto;
+    font-family: simsun;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+#full {
+    width: 840px;
+    margin: 0 auto;
+}
+.content_login {
+    width: 840px;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.login_content1{
+    border-bottom:0px dashed #666; 
+    padding-bottom:0px; 
+    text-align:left; 
+    margin:0 20px;
+}
+.login_content1 h5{
+    font-weight:bold; 
+    font-size:14px; 
+    color:#000; 
+    margin:30px 0 0; 
+    line-height:30px; 
+    padding:0 20px;  
+}
+.login_content1 .table{
+    padding:0 30px;
+}
+.login_content1 .table{
+    font-size:14px;
+}
+.login_content1 .table table tr td{
+    padding:5px 3px; 
+    height:18px; 
+    line-height:18px; 
+    text-align:left;
+}
+.login_content1 .table table tr td.left{
+    text-align:right; 
+    padding-top:6px;
+}
+.login_content1 .table table tr td dfn{
+    color:#f00; 
+    padding-right:5px; 
+    font-style:normal;}
+.login_content1 .inputbox{
+    width:250px; 
+    height:18px; 
+    float:left; 
+    line-height:18px; 
+    color:#333; 
+    border:1px solid #cacaca; 
+    background:#fff; 
+    padding:3px; 
+    margin-right:5px; 
+    display:inline;
+}
+.login_content1 div.oneline{
+    width:auto; 
+    height:31px; 
+}
+.login_content1 div.twoline{
+    width:auto; 
+    height:27px; 
+    color:#666; 
+    font-size:12px;
+}
+.login_cont01 p.error_one
+{
+    padding:0 0 0 10px; 
+    margin:0; 
+    float:left; 
+}
+.login_cont01 p.error_one span
+{
+    border:1px solid #f00; 
+    background:#f9f7e0; 
+    line-height:20px; 
+    font-size:12px; 
+    height:20px;
+    display:block; 
+    float:left; 
+    padding:0 5px;
+}
+.login_content2{
+    border-bottom:0px dashed #666; 
+    text-align:center; 
+    margin:0 20px 0; 
+    _margin:0 10px 0;
+}
+.login_content2 .table{
+    padding:0 30px; 
+    text-align:left;
+}
+.login_content2 h5{
+    font-weight:bold; 
+    font-size:14px; 
+    color:#000; 
+    margin:30px 0 20px; 
+    padding:0 20px; 
+    line-height:30px;  
+    text-align:left;
+}
+.login_content2 .table{
+    padding:0 30px 36px; 
+    font-size:14px;
+}
+.login_content2 .table table tr td{
+    padding:5px 3px; 
+    height:30px; 
+    line-height:25px; 
+    text-align:left;
+}
+.login_content2 .table table tr td.left{
+    text-align:right;
+}
+.login_content2 .table table tr td dfn{
+    color:#f00; 
+    padding-right:5px;
+}
+.login_content2 .inputbox{
+    width:250px; 
+    height:18px; 
+    float:left; 
+    line-height:18px; 
+    color:#333; 
+    border:1px solid #cacaca; 
+    background:#fff; 
+    padding:3px; 
+    margin-right:5px; 
+    display:inline;
+}
+.login_content2 div.oneline{
+    width:auto; 
+    height:auto;
+}
+.login_content2 div.twoline{
+    width:auto; 
+    height:25px; 
+    color:#666;
+}
+.login_content2 .birth {
+    width: 81px;
+    height: 20px;
+    line-height: 18px;
+    color: #333;
+    border: 1px solid #cacaca;
+    background: #fff;
+    padding: 1px;
+    margin-right: 5px;
+    display: inline;
+    float: center;
+}
+.login_content2 .s-select 
+{
+    width: 100px;
+    height: 20px;
+    line-height: 18px;
+    color: #333;
+    border: 1px solid #cacaca;
+    background: #fff;
+    padding: 1px;
+    margin-right: 5px;
+    display: inline;
+    float: center;
+}
+.login_content2 .city
+{
+    width: 200px;
+    height: 20px;
+    line-height: 18px;
+    color: #333;
+    border: 1px solid #cacaca;
+    background: #fff;
+    padding: 1px;
+    margin-right: 5px;
+    display: inline;
+    float: center;
+}
+a.reg_btn{
+    width:auto; 
+    height:42px; 
+    line-height:42px;
+    padding-left:20px; 
+    display:inline-block; 
+    text-decoration:none; 
+    margin-right:10px; 
+    font-size:14px;
+    cursor:pointer;
+}
+a.reg_btn span{ 
+    height:42px; 
+    line-height:42px; 
+    color:#fff; 
+    font-weight:normal; 
+    padding-right:20px; 
+    display:inline-block; 
+    font-size:20px; 
+    font-family:黑体;
+}
+a.reg_btn:link,a.reg_btn:visited,a.reg_btn:hover, a.reg_btn:active{
+    text-decoration:none;
+}
+#pwd-strong { 
+    float:left; 
+    margin:0px; 
+    padding:0px; 
+    list-style:none; 
+    background-repeat:no-repeat; 
+}
+#pwd-strong li { 
+    float:left; 
+    padding:0px; 
+    color:#ccc; 
+    font-size:11px; 
+    width:64px; 
+    height:10px; 
+    text-align:center; 
+    padding-top:9px; 
+}

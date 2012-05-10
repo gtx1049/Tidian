@@ -144,8 +144,8 @@
             <hr class="hr0">
         </div>
         <div class="questionblock">
-            <p>题目正文：</p>
-            <jsp:getProperty name="theques" property="content"/>
+            <p>题目正文：</p>            
+            <jsp:getProperty name="theques" property="content"/>           
             <br/>
             <div class="sign">
                 <p>提问人：<jsp:getProperty name="theques" property="asker"/></p>
@@ -192,6 +192,6 @@
                 </form>
             </div>
         </div>
-        
+        <c:import url="bottom.jsp"/>
     </body>
 </html>

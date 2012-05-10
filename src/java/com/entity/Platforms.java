@@ -21,9 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Platforms.findAll", query = "SELECT p FROM Platforms p"),
     @NamedQuery(name = "Platforms.findByPlaId", query = "SELECT p FROM Platforms p WHERE p.plaId = :plaId"),
-    @NamedQuery(name = "Platforms.findByUsrId", query = "SELECT p FROM Platforms p WHERE p.usrId = :usrId"),
     @NamedQuery(name = "Platforms.findByTopic", query = "SELECT p FROM Platforms p WHERE p.topic = :topic"),
-    @NamedQuery(name = "Platforms.findByContent", query = "SELECT p FROM Platforms p WHERE p.content = :content"),
     @NamedQuery(name = "Platforms.findByDate", query = "SELECT p FROM Platforms p WHERE p.date = :date"),
     @NamedQuery(name = "Platforms.findByLastDate", query = "SELECT p FROM Platforms p WHERE p.lastDate = :lastDate"),
     @NamedQuery(name = "Platforms.findByFavNumber", query = "SELECT p FROM Platforms p WHERE p.favNumber = :favNumber"),
@@ -40,18 +38,14 @@ public class Platforms implements Serializable {
     private Integer plaId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "usr_id")
-    private int usrId;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 64)
     @Column(name = "topic")
     private String topic;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 64)
+    @Lob
     @Column(name = "content")
-    private String content;
+    private byte[] content;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
@@ -77,6 +71,9 @@ public class Platforms implements Serializable {
     @Size(max = 4)
     @Column(name = "status")
     private String status;
+    @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")
+    @ManyToOne(optional = false)
+    private Users usrId;
 
     public Platforms() {
     }
@@ -85,9 +82,8 @@ public class Platforms implements Serializable {
         this.plaId = plaId;
     }
 
-    public Platforms(Integer plaId, int usrId, String topic, String content, Date date, Date lastDate, int favNumber, int clickNumber, int commentNumber) {
+    public Platforms(Integer plaId, String topic, byte[] content, Date date, Date lastDate, int favNumber, int clickNumber, int commentNumber) {
         this.plaId = plaId;
-        this.usrId = usrId;
         this.topic = topic;
         this.content = content;
         this.date = date;
@@ -105,14 +101,6 @@ public class Platforms implements Serializable {
         this.plaId = plaId;
     }
 
-    public int getUsrId() {
-        return usrId;
-    }
-
-    public void setUsrId(int usrId) {
-        this.usrId = usrId;
-    }
-
     public String getTopic() {
         return topic;
     }
@@ -121,11 +109,11 @@ public class Platforms implements Serializable {
         this.topic = topic;
     }
 
-    public String getContent() {
+    public byte[] getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(byte[] content) {
         this.content = content;
     }
 
@@ -177,6 +165,14 @@ public class Platforms implements Serializable {
         this.status = status;
     }
 
+    public Users getUsrId() {
+        return usrId;
+    }
+
+    public void setUsrId(Users usrId) {
+        this.usrId = usrId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -199,7 +195,7 @@ public class Platforms implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javabean.Platforms[ plaId=" + plaId + " ]";
+        return "com.entity.Platforms[ plaId=" + plaId + " ]";
     }
     
 }

@@ -49,7 +49,7 @@ public class QuestionManager {
     }
     public List<Questions> getSpecifyQuestions(int id){
         ArrayList<Integer> numbers = new ArrayList<Integer>();
-        String sql = "select u from Per_que_content u where "+"u.pq_id"+" ="+ id;
+        String sql = "select u from PerQueContent u where "+"u.pqId"+" ="+ id;
         Query query = (Query) entityManager.createQuery(sql);
         List<PerQueContent> per_que_content = query.getResultList();
         
@@ -57,7 +57,7 @@ public class QuestionManager {
        
         Iterator it = per_que_content.iterator();
         while(it.hasNext()){
-            int index = ((PerQueContent)it.next()).getPerQueContentPK().getQueId();            
+            int index = ((PerQueContent)it.next()).getQueId();            
             numbers.add(index);
         }
         for(int i =0 ;i<numbers.size();i++){
