@@ -47,24 +47,12 @@ public class QuestionManager {
         return personQuestions;
 
     }
-    public List<Questions> getSpecifyQuestions(int id){
+    public List<PerQueContent> getSpecifyQuestions(int id){
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         String sql = "select u from PerQueContent u where "+"u.pqId"+" ="+ id;
         Query query = (Query) entityManager.createQuery(sql);
         List<PerQueContent> per_que_content = query.getResultList();
         
-        List<Questions> questions = new ArrayList<Questions>();
-       
-        Iterator it = per_que_content.iterator();
-        while(it.hasNext()){
-            int index = ((PerQueContent)it.next()).getQueId();            
-            numbers.add(index);
-        }
-        for(int i =0 ;i<numbers.size();i++){
-            int index = numbers.get(i);
-            Questions find = entityManager.find(Questions.class, index);
-            questions.add(find);
-        }
-        return questions;
+        return per_que_content;
     }
 }

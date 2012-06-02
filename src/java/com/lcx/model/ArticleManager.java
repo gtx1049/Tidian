@@ -39,6 +39,14 @@ public class ArticleManager {
         return articles.size();
     }
     
+    public List<Articles> getIndexArticles(int number){
+        String sql = "select u from Articles u order by u.writeTime desc";
+        Query query = (Query) entityManager.createQuery(sql);
+        query.setFirstResult(0);
+        query.setMaxResults(number);
+        List<Articles> articles = query.getResultList();
+        return articles;
+    }
     public List<Articles> getSpecifyArticle(int page,int id){
         String sql = "select u from PersonArticles u where " + "u.users.usrId" + "=" + id;           
         Query query = (Query) entityManager.createQuery(sql);

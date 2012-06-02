@@ -1,0 +1,130 @@
+/* 
+    Document   : Rank
+    Created on : 2012-5-26, 9:26:01
+    Author     : nankonami
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root 
+{ 
+    display: block;
+}
+div#main_con
+{
+    height: 400px;
+    margin-left: 120px;
+}
+div.ranking
+{
+    float:left; 
+    width:320px;
+    margin: 10px 10px 0 0;
+    padding: 0 0 10px 0;
+    border:solid 1px #DDD;
+}
+div.ranking h1
+{
+    height:32px;   
+    padding-left: 10px;
+    margin-top: 0;
+    background: url(../pic/top_head.jpg) repeat-x 0;
+    font:bold 16px Arial, Helvetica, sans-serif;
+    border: #cccc00 solid 1px;
+}
+div.ranking dl
+{
+    margin-top: -3px;
+    padding: 0 8px;
+    height: 330px;
+}
+div.ranking dl span
+{
+    display: inline-block;
+    height: 24px;
+    overflow: hidden;
+}
+div.ranking dl dt
+{
+    height: 20px;
+    width: 310px;
+}
+div.ranking dl dt span
+{
+    margin: 2px 0 0 0;
+    width: 100px;
+    font-size: 14px;
+    font-family: sans_serif;
+}
+div.ranking dl dt .title
+{
+    text-align: center;
+}
+div.ranking dl dt .num
+{
+    text-align: right;
+}
+div.inner
+{
+    padding:8px;
+    line-height:18px;
+    overflow:hidden;
+    color:#3083C7;
+}
+.rank_list
+{
+    line-height:15px;
+    margin:auto;
+    padding-top:5px;
+    padding-left: 0;
+}
+.rank_list a
+{
+    color:#3083C7;
+    white-space:nowrap;
+}
+.rank_list li
+{
+    line-height: 25px;
+    white-space:nowrap;
+    overflow:hidden;
+    position: relative;
+}
+.rank_list li a
+{
+    padding-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.rank_list li.top3 em
+{
+    background:#FFE4B7;
+    color:#FF6800;
+}
+.rank_list em
+{   
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width:12px;
+    height:12px;
+    border:1px solid #B1E0F4;
+    color:#6298CC;
+    font-style:normal;
+    font-size:10px;
+    font-family:Arial;
+    background:#E6F0FD;
+    text-align:center;
+    line-height:12px;
+    overflow:hidden;
+}
+.rank_list span
+{
+    position:absolute;
+    width:60px;
+    color:#B7B7B7;
+    text-align:right;
+    height:14px;
+    background:#fff;
+    left:220px;
+}

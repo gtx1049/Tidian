@@ -1,0 +1,153 @@
+body{
+	margin-top:0px;
+	width:1366px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#header{
+	height:30px;
+	width:1366px;
+	background-color:#39AECF;
+}
+#header a{
+    color:white;
+    position: absolute;
+    left: 150px;
+    top: 6px;
+    text-decoration: none;
+    font-weight: 700;
+}
+#middle{
+	margin-top:-16px;
+	height:60px;
+	width:1366px;
+	background-color:#0A67A3;
+}
+#middle ul{
+	margin-left:350px;
+	padding-top:21px;
+	padding-bottom:21px;
+}
+.select ul li{
+
+	display:inline;
+	list-style-type:none;
+	text-align:center;
+}
+.select ul li a{
+	font-weight:600;
+	font-size:18px;
+	color:white;
+	text-decoration: none;
+        outline:none;
+}
+.logo{
+	margin-left:150px;
+	padding-top:14px;
+	float:left;
+}
+.logo a{ 
+        color:white;
+	font-weight:700;
+	font-size:24px;
+	text-decoration: none;
+        outline:none;
+        text-shadow: 5px 5px 5px black;
+}
+#navigation{
+	float:left;
+	margin-top:30px;
+	margin-left:200px;
+	border:1px dashed;
+	height:380px;
+	width:150px;
+	background-color:#F0F0E6;
+}
+#navigation .up{
+	margin-top:10px;
+	text-align:center;
+}
+#navigation .up img{
+	height:150px;
+	width:120px;
+}
+#navigation .up a{
+	text-decoration:none;
+	color:#3C9DD0;
+	font-size:14px;
+}
+#navigation .up a:hover{
+	text-decoration:underline;
+}
+.up form{
+	margin-top:0px;
+	display:inline;
+}
+#navigation a:hover{
+	text-decoration:underline;
+}
+#navigation ul{
+	margin-top:30px;
+	list-style-type:none;
+	line-height:25px;
+	
+}
+#navigation ul a{
+	color:black;
+	outline:none;
+	text-decoration: none;
+}
+#content{
+        font-size:20px;
+	width:760px;
+	height:380px;
+	margin-left:400px;
+	margin-top:30px;
+	border:1px solid  #a1a1a1;
+        border-radius:10px;
+        -moz-border-radius:25px;
+        
+}
+.question{
+    width:400px;
+    height:300px;
+    border:1px solid grey;
+    margin-top: 40px;
+    margin-left: 50px;
+    box-shadow: 5px 5px 2px #888888;
+}
+.qdescription{
+    height:300px;
+    width: 200px;
+    margin-right: 50px;
+    float:right;
+    border:1px solid grey;
+    box-shadow: 5px 5px 2px #888888;
+}
+hr{
+	margin-top:40px;
+}
+
+.selectPage{
+    position:absolute;
+    font-size: 14px;
+    top:470px;
+    left: 420px;
+}
+#portrait{
+	height:150px;
+	width:120px;
+}
+#welcome p{
+    text-align: center;
+}
+h1{
+   text-shadow: 5px 5px 5px #FF0000;
+   margin-left: 600px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}

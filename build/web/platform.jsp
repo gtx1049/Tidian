@@ -28,32 +28,25 @@
 <html>
 	<head>
 		<title>题典网论坛</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="description" content="论坛，你在题典网放松的乐园">
-		<link rel="stylesheet" type="text/css"  href="platform.css" />
+		<link rel="stylesheet" type="text/css"  href="css/platform.css" />
 		<script type="text/javascript" src="platform.js"></script>
 		<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body>
 		<div class="header">
-			Welcome to our platform
 		</div>
 		<div class="middle">
-			<ul class="right">
-				<li class="new"><a href="#deliever">发表新贴</a></li>
-			</ul>
-			<ul class="left">
+			<ul>				
+                            	<li class="index"><a href="index.jsp">首页</a></li>
 				<li class="main"><a href="">精品</a></li>
-				<li class="index"><a href="">首页</a></li>
+                                <li class="new"><a href="#deliever">发表新贴</a></li>
 			</ul>
                 </div>
 		<div class="content">
 
 		<div class="rightside">
-			<div class="information">
-				<p>个人信息</p>
-                                <p>${user.getNickname()}</p>
-			</div>
 			<span>评论数排行</span>
 			<div class="com_rank">
                             <c:forEach var="com_platform" items="${com_platforms}">
@@ -69,32 +62,28 @@
 			</div>
 		</div>
 		<div class="leftside">
-                    <ul class="pla_inf_right">
-                        <li>作者</li>
-                        <li>最后回复</li>
-                    </ul>
-                    <ul class="pla_inf_left">
-                        <li>点击</li>
-                        <li>回复</li>
-                        <li>标题</li>
+                    <ul class="column">
+                        <li class="click_number1">点击</li>
+                        <li class="reply_number">回复</li>
+                        <li class="platform">标题</li>
+                        <li class="author">作者</li>
+                        <li class="reply_time">最后回复</li>
                     </ul>
                         <ul>
                         <c:forEach var="platform" items="${platforms}" varStatus="status">                        
-                        <ul class="pla_inf_right">
-                            <li class="author">${platform.getUsrId().getUsrName()}</li>
-                            <li class="reply_time">${platform.getLastDate().toString().substring(3, 10)}</li>                          
-                        </ul>
-                        <ul class="pla_inf_left">
-                            <li class="click_number">${platform.getClickNumber()}</li>
+                        <ul class="row">
+                            <li class="click_number2">${platform.getClickNumber()}</li>
                             <li class="reply_number">${platform.getCommentNumber()}</li>
                             <c:choose>
                                 <c:when test="${status.count%2==0}">
-                                    <li class="platform" class="platform1"><a href="FindPlatform?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
+                                    <li class="platform"><a href="FindPlatform?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
                                 </c:when>                                    
                                 <c:when test="${status.count%2!=0}">
-                                    <li class="platform" class="platform2"><a href="FindPlatform?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
+                                    <li class="platform"><a href="FindPlatform?pla_id=${platform.getPlaId()}"  class="topic">${platform.getTopic()}</a></li>
                                 </c:when>
                             </c:choose>
+                         <li class="author">${platform.getUsrId().getUsrName()}</li>
+                            <li class="reply_time">${platform.getLastDate().toString().substring(3, 10)}</li> 
                         </ul>
                             <hr/>
                     </c:forEach>

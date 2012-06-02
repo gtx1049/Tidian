@@ -28,7 +28,7 @@
     }
 %>
 
-<link rel="stylesheet" href="qandstyle.css" type="text/css">
+<link rel="stylesheet" href="css/qandstyle.css" type="text/css">
 <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
 <script charset="utf-8" src="kindeditor-min.js"></script>  
 <script charset="utf-8" src="lang/zh_CN.js"></script>  

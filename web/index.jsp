@@ -9,9 +9,9 @@
 <html>
 	<head>
 		<title>题典网</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="description" content="中学生学生交流平台，使你的学习变得更加愉快高效">
-		<link rel="stylesheet" type="text/css"  href="index.css" />
+		<link rel="stylesheet" type="text/css"  href="css/index.css" />
 		<script type="text/javascript" src="index.js"></script>
                 <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
                 <script charset="utf-8" src="kindeditor-min.js"></script>  
@@ -44,7 +44,7 @@
 				<a href="" id="top2">忘记密码</a>
 		</div>
 		<div id="header_middle" >
-				<img  src="head_picture.jpg" class="header_picture"/>
+				<img  src="images/head_picture.jpg" class="header_picture"/>
 				
 		</div>
 		<div id="header_bottom">
@@ -54,7 +54,7 @@
 				<li id="picture5"><a onmouseover="over(this);" onmouseout="out(this);" id="p5" href="Platform">灌水论坛</a></li>
 				<li id="picture4"><a onmouseover="over(this);" onmouseout="out(this);" id="p4" href="">答疑解惑</a></li>
 				<li id="picture3"><a onmouseover="over(this);" onmouseout="out(this);" id="p3" href="blogServlet?page=1">经验分享</a></li>
-				<li id="picture2"><a onmouseover="over(this);" onmouseout="out(this);" id="p2" href="">资料下载</a></li>
+				<li id="picture2"><a onmouseover="over(this);" onmouseout="out(this);" id="p2" href="material">资料下载</a></li>
 				<li id="picture1"><a onmouseover="over(this);" onmouseout="out(this);" id="p1" href="IndexControl">首页</a></li>			
 			</ul>
 		</div>
@@ -63,19 +63,29 @@
                     <c:import url="DisplayQues.jsp"/>
 		</div>
 		<div id="question_search">
-                    question_search
-                    
+                    <h4>问题搜索区</h4>
+                    <div class="search">
+                        <form action="search" method="get">
+                            <input type="text" name="search"/><br><br>
+                            <input type="submit" value="进入题典"/>
+                        </form>
+                    </div>
 		</div>
 		<div id="platform">
-			<p>灌水论坛专区</p>
-                        <ul>
+			<h4>灌水论坛专区</h4>
+                        <ul class="list">
                             <c:forEach var="platform" items="${index_platforms}">
                                 <li class="platfor"><a href="FindPlatform?pla_id=${platform.getPlaId()}">${platform.getTopic()}</a></li>
                             </c:forEach>
                         </ul>
 		</div>
 		<div id="experience">
-			experience
+			<h4>经验分享专区</h4>
+                        <ul class="list">
+                            <c:forEach var="article" items="${index_articles}">
+                                <li class="platfor"><a href="FindPlatform?pla_id=${platform.getPlaId()}">${article.getTopic()}</a></li>
+                            </c:forEach>
+                        </ul>
 		</div>
 		<div id="material">
 			<ul>
@@ -118,25 +128,14 @@
 		</div>
 		</div>
 		<div id="recommand">
-			<ul>
-				<li  id="rec_question"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="11" href="#">问题</a></li>
-				<li id="rec_experience"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="12" href="#">经验</a></li>
-				<li id="rec_platform"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="13" href="#">论坛</a></li>
-				<li id="rec_material"><a onclick="_Onclick(this);return false;" onmouseover="_over(this);" onmouseout="_out(this);" id="14" href="#">资料</a></li>
-			</ul>
-				<div class="_dis">
-					问题
-				</div>
-				<div class="_undis">
-					经验
-				</div>
-				<div class="_undis">
-					论坛
-                                        
-				</div>
-				<div class="_undis">
-					资料
-				</div>
+                    <h4>为您推荐</h4>
+                        <div class="list">
+                            <ul>
+                                <c:forEach var="recArticle" items="${recArticles}">
+                                    <li><a href="ShowBlog?">${recArticle.getTopic()}</a></li>
+                                </c:forEach>
+                            </ul>
+			</div>
 			
 		</div>
 

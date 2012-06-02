@@ -1,0 +1,131 @@
+/* 
+    Document   : show
+    Created on : 2012-5-26, 20:30:36
+    Author     : nankonami
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root 
+{ 
+    display: block;
+}
+div#article_title
+{
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+div#article_title h1
+{
+    font:normal 18px Arial !important;
+}
+div#article_detail
+{
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 10px;
+    display:inline; 
+    line-height:30px; 
+    white-space:nowrap;
+    padding:5px 0; 
+    color:#999; 
+    font:normal 13px/24px Arial; 
+    text-align:right;
+}
+div#article_detail a
+{
+    color: #ff9900;
+    margin-left: 15px;
+}
+div#article_detail .article_cat
+{
+     margin-left: 50px;
+}
+div#article_detail .article_date
+{
+    margin-left: 500px;
+}
+div#article_detail .article_scan
+{
+    margin-left: 10px;
+}
+div#article_detail .article_comments
+{
+    margin-left: 10px;
+}
+div#article_content
+{
+    border: #8E2013 solid 1px;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 5px;
+}
+div#article_comment
+{
+    width: 80%;
+    margin-left: 10%;
+}
+div#comment_title
+{
+    background-color: #AEEEEE;
+    height: 20px;
+}
+div#comment_list
+{
+  margin-top: -5px;
+}
+div#comment_list ul
+{
+    padding-left: 5px;
+}
+div#comment_list li
+{
+    overflow: hidden;
+    margin-left: -5px;
+    position: relative;
+}
+div#comment_detail
+{
+    background-color: #F0FFFF;
+}
+div#comment_detail .comment_floor
+{
+    color:#999;
+    font-size: 12px;
+}
+div#comment_detail .comment_author
+{
+    color:#4F94CD;
+    font-size: 12px;
+}
+div#comment_detail .comment_time
+{
+    color:#999;
+    font-size: 12px;
+}
+div#comment_content
+{
+  
+}
+div#comment_content dl dt img
+{
+    width:45px; 
+    height:45px; 
+    padding:1px; 
+    border: #e0e0e0 solid 1px;
+}
+div#comment_content dl dt
+{
+    float: left;
+    width:54px; 
+    overflow:hidden; 
+}
+div#commnet_content dl dd
+{
+    color:#666; 
+    font-size: 14px;
+    line-height:20px;
+}

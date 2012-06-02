@@ -71,7 +71,7 @@ public class PlatformAdd extends HttpServlet {
             newPlatform.setUsrId(user);
             newPlatform.setTopic(topic);
             newPlatform.setContent(content.getBytes());
-            newPlatform.setDate(new Date());
+            newPlatform.setSetDate(new Date());
             newPlatform.setLastDate(new Date());
             newPlatform.setClickNumber(0);
             newPlatform.setFavNumber(0);            
@@ -79,8 +79,9 @@ public class PlatformAdd extends HttpServlet {
             newPlatform.setStatus("yes");
             
             EntityManager entityManager = entityManagerFactory.createEntityManager();
-            entityManager.persist(newPlatform);
+            entityManager.persist(newPlatform);            
             userTransaction.commit();
+
             }
             catch(Exception e)
             {

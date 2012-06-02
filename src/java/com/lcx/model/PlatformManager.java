@@ -23,7 +23,7 @@ public class PlatformManager {
         return platforms.size();
     }
     public List<Platforms> getByComment(){
-        String sql = "select u from Platforms u order by u.commentNumber";
+        String sql = "select u from Platforms u order by u.commentNumber desc";
         Query query = (Query) entityManager.createQuery(sql);
         query.setFirstResult(0);
         query.setMaxResults(10);
@@ -31,7 +31,7 @@ public class PlatformManager {
         return platforms;
     }
     public List<Platforms> getByFavorite(){
-        String sql = "select u from Platforms u order by u.favNumber";
+        String sql = "select u from Platforms u order by u.favNumber desc";
         Query query = (Query) entityManager.createQuery(sql);
         query.setFirstResult(0);
         query.setMaxResults(10);

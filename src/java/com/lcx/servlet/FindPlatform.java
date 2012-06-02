@@ -4,9 +4,12 @@
  */
 package com.lcx.servlet;
 
+import com.entity.PlaReply;
 import com.entity.Platforms;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -46,17 +49,21 @@ public class FindPlatform extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String spla_id = request.getParameter("pla_id");
         int pla_id = Integer.parseInt(spla_id);
+        Platforms platform = null;
+        Collection<PlaReply> pla_replies = null;
         try{
             userTransaction.begin();
-            Platforms platform = entityManager.find(Platforms.class, pla_id);
+            platform = entityManager.find(Platforms.class, pla_id);
             platform.setClickNumber(platform.getClickNumber()+1);
             entityManager.merge(platform);
-            String dis = new String(platform.getContent());
-            out.println(dis);
+            pla_replies = platform.getPlaReplyCollection();
             userTransaction.commit();
         }catch(Exception e){
             out.println("fail");
         }
+        request.setAttribute("pla_replies", pla_replies);
+        request.setAttribute("platform", platform);
+        request.getRequestDispatcher("findplatform.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

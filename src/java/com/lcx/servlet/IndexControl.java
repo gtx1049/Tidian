@@ -4,11 +4,15 @@
  */
 package com.lcx.servlet;
 
+import com.entity.Articles;
 import com.entity.Platforms;
 import com.entity.Questions;
+import com.entity.Users;
 import com.gtx.Quesdisplay;
 import com.gtx.QuestionManager;
+import com.lcx.model.ArticleManager;
 import com.lcx.model.PlatformManager;
+import com.lcx.model.Recommend;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -54,13 +58,23 @@ public class IndexControl extends HttpServlet {
         EntityManager entitymanager = entityManagerFactory.createEntityManager();
         PlatformManager platformManager = new PlatformManager(entitymanager);
         List <Platforms> platforms = platformManager.getSpecifyPlatforms(0,8);
+        ArticleManager articleManager = new ArticleManager(entitymanager);        
+        List <Articles> articles = articleManager.getIndexArticles(8);
         QuestionManager questionManager = new QuestionManager(entitymanager,userTransaction);
         List displayli = questionManager.getQueslist();
         List lidis = questionManager.getTaglist();
+        if(request.getSession().getAttribute("user")!=null){
+            Users user = (Users)request.getSession().getAttribute("user");
+            Recommend recommend = new Recommend(entitymanager,user.getUsrId());
+            ArrayList<Articles> recArticles = (ArrayList<Articles>) recommend.getRecArticles();
+            request.setAttribute("recArticles", recArticles);
+        }
         request.setAttribute("index_platforms", platforms);
+        request.setAttribute("index_articles", articles);
         request.setAttribute("quesli", displayli);
         request.setAttribute("taglist", lidis);
-        request.getRequestDispatcher("index.jsp").forward(request, response);       
+        out.println(articles.size());
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,11 +5,13 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Platforms.findAll", query = "SELECT p FROM Platforms p"),
     @NamedQuery(name = "Platforms.findByPlaId", query = "SELECT p FROM Platforms p WHERE p.plaId = :plaId"),
     @NamedQuery(name = "Platforms.findByTopic", query = "SELECT p FROM Platforms p WHERE p.topic = :topic"),
-    @NamedQuery(name = "Platforms.findByDate", query = "SELECT p FROM Platforms p WHERE p.date = :date"),
+    @NamedQuery(name = "Platforms.findBySetDate", query = "SELECT p FROM Platforms p WHERE p.setDate = :setDate"),
     @NamedQuery(name = "Platforms.findByLastDate", query = "SELECT p FROM Platforms p WHERE p.lastDate = :lastDate"),
     @NamedQuery(name = "Platforms.findByFavNumber", query = "SELECT p FROM Platforms p WHERE p.favNumber = :favNumber"),
     @NamedQuery(name = "Platforms.findByClickNumber", query = "SELECT p FROM Platforms p WHERE p.clickNumber = :clickNumber"),
@@ -46,11 +48,9 @@ public class Platforms implements Serializable {
     @Lob
     @Column(name = "content")
     private byte[] content;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date")
+    @Column(name = "set_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date setDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "last_date")
@@ -68,12 +68,16 @@ public class Platforms implements Serializable {
     @NotNull
     @Column(name = "comment_number")
     private int commentNumber;
-    @Size(max = 4)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 4)
     @Column(name = "status")
     private String status;
     @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")
     @ManyToOne(optional = false)
     private Users usrId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "plaId")
+    private Collection<PlaReply> plaReplyCollection;
 
     public Platforms() {
     }
@@ -82,15 +86,15 @@ public class Platforms implements Serializable {
         this.plaId = plaId;
     }
 
-    public Platforms(Integer plaId, String topic, byte[] content, Date date, Date lastDate, int favNumber, int clickNumber, int commentNumber) {
+    public Platforms(Integer plaId, String topic, byte[] content, Date lastDate, int favNumber, int clickNumber, int commentNumber, String status) {
         this.plaId = plaId;
         this.topic = topic;
         this.content = content;
-        this.date = date;
         this.lastDate = lastDate;
         this.favNumber = favNumber;
         this.clickNumber = clickNumber;
         this.commentNumber = commentNumber;
+        this.status = status;
     }
 
     public Integer getPlaId() {
@@ -117,12 +121,12 @@ public class Platforms implements Serializable {
         this.content = content;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getSetDate() {
+        return setDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setSetDate(Date setDate) {
+        this.setDate = setDate;
     }
 
     public Date getLastDate() {
@@ -171,6 +175,15 @@ public class Platforms implements Serializable {
 
     public void setUsrId(Users usrId) {
         this.usrId = usrId;
+    }
+
+    @XmlTransient
+    public Collection<PlaReply> getPlaReplyCollection() {
+        return plaReplyCollection;
+    }
+
+    public void setPlaReplyCollection(Collection<PlaReply> plaReplyCollection) {
+        this.plaReplyCollection = plaReplyCollection;
     }
 
     @Override

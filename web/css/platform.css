@@ -1,0 +1,155 @@
+body{
+	background:url("bg2.jpg") no-repeat;
+}
+.header{
+	margin-left:190px;
+}
+.content{
+	width:960px;
+	height:1580px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:10px;
+}
+.leftside{
+	width:720px;
+	height:1580px;
+	border:1px solid grey;
+	background-color:white;
+        border-radius:10px;
+        -moz-border-radius:25px;
+        line-height: 20px;
+}
+.leftside a{
+    text-decoration: none;
+}
+
+hr{
+    height:1px; 
+    border:none;
+    border-top:1px dashed #1E90FF;
+    width:700px;
+    margin-left: -30px;
+}
+.rightside{
+	width:220px;
+	height:1580px;
+	border:1px solid grey;
+	float:right;
+	background-color:white;
+        border-radius:10px;
+        -moz-border-radius:25px;
+}
+.rightside a{
+    text-decoration: none;
+}
+.com_rank{
+    line-height: 25px;
+}
+.fav_rank{
+    line-height: 25px;
+}
+.middle{	
+	font-size:18px;
+	background-color:#4577D4;
+	width:960px;
+	height:30px;
+	border:1px solid grey;
+	margin-left:auto;
+	margin-right:auto;
+}
+.middle ul{
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.middle li{
+    display: inline;
+}
+
+.middle li a{
+	color:white;
+	text-decoration: none;
+}
+.index{
+    margin-left: -5px;
+}
+.main{
+    margin-left: 12px;
+}
+.new{
+    margin-left: 700px;
+}
+.deliever{
+    margin-left: 270px;
+}
+.rightside span{
+    display: block;
+    margin-top:10px;
+}
+.com_rank,.fav_rank{
+	width:220px;
+}
+.com_rank li,.fav_rank li{
+    list-style-type: none;
+}
+
+.column li{
+    display: inline;
+}
+.row li{
+    display:inline;
+}
+.click_number2{
+    margin-left: -45px;
+}
+.click_number1{
+    margin-left: -5px;
+}
+.reply_number{
+    position: absolute;
+    left: 285px;
+}
+.platform{
+    position:absolute;
+    left: 340px;
+    width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.author{
+    position:absolute;
+    left: 700px;
+}
+.reply_time{  
+    position:absolute;
+    left: 800px;
+}
+.selectPage{
+    margin-left: 40px;
+}
+.selectPage a{
+    text-decoration: none;
+}
+#editorcontainer
+{ 
+    height: 200px; 
+    display: none;
+}
+#editor_id{
+    width:900px;
+}
+.submit{
+    margin-top: 10px;
+    color: none;
+    background:url("./images/deliever.jpg") no-repeat;
+    width: 76px;
+    height:32px;
+}
+._platform{
+        margin-left: 10px;
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+}

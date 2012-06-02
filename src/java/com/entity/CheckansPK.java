@@ -75,7 +75,7 @@ public class CheckansPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gtx.CheckansPK[ usrId=" + usrId + ", ansId=" + ansId + " ]";
+        return "com.entity.CheckansPK[ usrId=" + usrId + ", ansId=" + ansId + " ]";
     }
     
 }

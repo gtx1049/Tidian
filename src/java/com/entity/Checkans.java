@@ -65,7 +65,7 @@ public class Checkans implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gtx.Checkans[ checkansPK=" + checkansPK + " ]";
+        return "com.entity.Checkans[ checkansPK=" + checkansPK + " ]";
     }
     
 }

@@ -34,6 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByPortrait", query = "SELECT u FROM Users u WHERE u.portrait = :portrait"),
     @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status")})
 public class Users implements Serializable {
+    @Basic(optional =     false)
+    @NotNull
+    @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,9 +51,7 @@ public class Users implements Serializable {
     @Size(min = 1, max = 16)
     @Column(name = "usr_name")
     private String usrName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
+    @Size(max = 36)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="电子邮件无效")//if the field contains email address consider using this annotation to enforce field validation
@@ -69,11 +72,6 @@ public class Users implements Serializable {
     private String province;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "birthday")
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 4)
     @Column(name = "sex")
     private String sex;
@@ -91,10 +89,18 @@ public class Users implements Serializable {
     private String status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
     private Collection<PersonQuestions> personQuestionsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<Articles> articlesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<PersonArticles> personArticlesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
     private Collection<Platforms> platformsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<PlaReply> plaReplyCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<ArtComments> artCommentsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Collection<ArtReply> artReplyCollection;
 
     public Users() {
     }
@@ -103,10 +109,9 @@ public class Users implements Serializable {
         this.usrId = usrId;
     }
 
-    public Users(Integer usrId, String usrName, String password, String email, String nickname, String province, Date birthday, String sex, int experience, String status) {
+    public Users(Integer usrId, String usrName, String email, String nickname, String province, Date birthday, String sex, int experience, String status) {
         this.usrId = usrId;
         this.usrName = usrName;
-        this.password = password;
         this.email = email;
         this.nickname = nickname;
         this.province = province;
@@ -164,14 +169,6 @@ public class Users implements Serializable {
         this.province = province;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     public String getSex() {
         return sex;
     }
@@ -214,6 +211,15 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Articles> getArticlesCollection() {
+        return articlesCollection;
+    }
+
+    public void setArticlesCollection(Collection<Articles> articlesCollection) {
+        this.articlesCollection = articlesCollection;
+    }
+
+    @XmlTransient
     public Collection<PersonArticles> getPersonArticlesCollection() {
         return personArticlesCollection;
     }
@@ -229,6 +235,33 @@ public class Users implements Serializable {
 
     public void setPlatformsCollection(Collection<Platforms> platformsCollection) {
         this.platformsCollection = platformsCollection;
+    }
+
+    @XmlTransient
+    public Collection<PlaReply> getPlaReplyCollection() {
+        return plaReplyCollection;
+    }
+
+    public void setPlaReplyCollection(Collection<PlaReply> plaReplyCollection) {
+        this.plaReplyCollection = plaReplyCollection;
+    }
+
+    @XmlTransient
+    public Collection<ArtComments> getArtCommentsCollection() {
+        return artCommentsCollection;
+    }
+
+    public void setArtCommentsCollection(Collection<ArtComments> artCommentsCollection) {
+        this.artCommentsCollection = artCommentsCollection;
+    }
+
+    @XmlTransient
+    public Collection<ArtReply> getArtReplyCollection() {
+        return artReplyCollection;
+    }
+
+    public void setArtReplyCollection(Collection<ArtReply> artReplyCollection) {
+        this.artReplyCollection = artReplyCollection;
     }
 
     @Override
@@ -254,6 +287,14 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "com.entity.Users[ usrId=" + usrId + " ]";
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
     
 }

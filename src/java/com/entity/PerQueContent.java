@@ -21,6 +21,8 @@ public class PerQueContent {
     @Id
     @Column(name="que_id")
     private int queId;
+    @Column(name="content")
+    private String content;
     public void setQueId(int queId){
         this.queId = queId;
     }
@@ -32,5 +34,11 @@ public class PerQueContent {
     }
     public int getPqId(){
         return this.pqId;
-}
+    }
+    public void setContent(String content){
+        this.content = content;
+    }
+    public String getContent(){
+        return this.content;
+    }
 }

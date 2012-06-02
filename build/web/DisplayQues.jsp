@@ -3,7 +3,7 @@
     Created on : 2012-5-5, 20:16:14
     Author     : Administrator
 --%>
-<link rel="stylesheet" type="text/css"  href="DisplayQues.css" />
+<link rel="stylesheet" type="text/css"  href="css/DisplayQues.css" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.gtx.Quesdisplay" %>
 

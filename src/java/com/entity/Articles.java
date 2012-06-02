@@ -5,11 +5,13 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -21,7 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Articles.findAll", query = "SELECT a FROM Articles a"),
     @NamedQuery(name = "Articles.findByArtId", query = "SELECT a FROM Articles a WHERE a.artId = :artId"),
-    @NamedQuery(name = "Articles.findByUsrId", query = "SELECT a FROM Articles a WHERE a.usrId = :usrId"),
     @NamedQuery(name = "Articles.findByCategory", query = "SELECT a FROM Articles a WHERE a.category = :category"),
     @NamedQuery(name = "Articles.findByTopic", query = "SELECT a FROM Articles a WHERE a.topic = :topic"),
     @NamedQuery(name = "Articles.findByWriteTime", query = "SELECT a FROM Articles a WHERE a.writeTime = :writeTime"),
@@ -39,10 +40,6 @@ public class Articles implements Serializable {
     private Integer artId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "usr_id")
-    private int usrId;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "category")
     private String category;
@@ -54,8 +51,9 @@ public class Articles implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "content")
-    private byte[] content;
+    private String content;
     @Basic(optional = false)
     @NotNull
     @Column(name = "write_time")
@@ -76,6 +74,11 @@ public class Articles implements Serializable {
     @Size(max = 4)
     @Column(name = "status")
     private String status;
+    @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")
+    @ManyToOne(optional = false)
+    private Users usrId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artId")
+    private Collection<ArtComments> artCommentsCollection;
 
     public Articles() {
     }
@@ -84,9 +87,8 @@ public class Articles implements Serializable {
         this.artId = artId;
     }
 
-    public Articles(Integer artId, int usrId, String category, String topic, byte[] content, Date writeTime, int monthlyScan, int totalScan, int collectNumber) {
+    public Articles(Integer artId, String category, String topic, String content, Date writeTime, int monthlyScan, int totalScan, int collectNumber) {
         this.artId = artId;
-        this.usrId = usrId;
         this.category = category;
         this.topic = topic;
         this.content = content;
@@ -102,14 +104,6 @@ public class Articles implements Serializable {
 
     public void setArtId(Integer artId) {
         this.artId = artId;
-    }
-
-    public int getUsrId() {
-        return usrId;
-    }
-
-    public void setUsrId(int usrId) {
-        this.usrId = usrId;
     }
 
     public String getCategory() {
@@ -128,11 +122,11 @@ public class Articles implements Serializable {
         this.topic = topic;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
@@ -174,6 +168,23 @@ public class Articles implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Users getUsrId() {
+        return usrId;
+    }
+
+    public void setUsrId(Users usrId) {
+        this.usrId = usrId;
+    }
+
+    @XmlTransient
+    public Collection<ArtComments> getArtCommentsCollection() {
+        return artCommentsCollection;
+    }
+
+    public void setArtCommentsCollection(Collection<ArtComments> artCommentsCollection) {
+        this.artCommentsCollection = artCommentsCollection;
     }
 
     @Override

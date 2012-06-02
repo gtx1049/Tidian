@@ -3,14 +3,10 @@
  * and open the template in the editor.
  */
 package com.lcx.servlet;
-import com.entity.Articles;
-import com.entity.Users;
-import com.entity.Material;
-import com.entity.Questions;
-import com.entity.PersonQuestions;
+import com.entity.*;
 import com.lcx.model.ArticleManager;
-import com.lcx.model.MaterialManager;
 import com.lcx.model.QuestionManager;
+import com.lcx.model.Recommend;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -60,52 +56,74 @@ public class PersonCenter extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-       // Users kobe = entityManager.find(Users.class, 1);
         Users kobe = (Users) request.getSession().getAttribute("user");
         if(kobe==null){
             response.sendRedirect("login.html");
-            return;          
-        }
-        String spage = request.getParameter("page");
-        int page = 0;
-        if(spage!=null){
-            page = Integer.parseInt(spage);
-        }
-        List<Articles> articles = new ArrayList<Articles>();
-        ArticleManager articleManager = new ArticleManager(entityManager);
-        articles = articleManager.getSpecifyArticle(page,kobe.getUsrId());
-        Integer art_number = articleManager.getSize(kobe.getUsrId());  
-        List<Material> materials = new ArrayList<Material>();
-        MaterialManager materialManager = new MaterialManager(entityManager);
-        materials = materialManager.getMaterial(kobe.getUsrId());
-        
-        String sqpage = request.getParameter("qpage");
-        int qpage = 1;
-        if(sqpage!=null){
-            qpage = Integer.parseInt(sqpage);
-        }
-        QuestionManager questionManager = new QuestionManager(entityManager);
-        List<Questions> questions = new ArrayList<Questions>();
-
-        PersonQuestions personQuestions = questionManager.getSpecifyQuestion(kobe.getUsrId(),qpage);
-        Integer question_number = 0;
-        if(personQuestions != null){
-            questions = questionManager.getSpecifyQuestions(personQuestions.getPqId());
-            question_number = questionManager.getNumber(kobe.getUsrId());
-        }
+            return;
+        }  
 
         HttpSession session = request.getSession();
-       // session.setAttribute("user", kobe);
-        session.setAttribute("art_number", art_number);
-        request.setAttribute("articles", articles);
-        request.setAttribute("materials", materials);
-        request.setAttribute("personQuestions", personQuestions);
-        request.setAttribute("questions", questions);
-
-        out.println(questions.size());
-        session.setAttribute("question_number", question_number);
-        out.println(kobe.getPortrait());
-        request.getRequestDispatcher("/person_center.jsp").forward(request, response);
+        String sid = request.getParameter("id");
+        if(sid == null){
+            request.getRequestDispatcher("/person_center.jsp").forward(request, response);
+        }
+        int id = Integer.parseInt(sid);
+        switch (id)
+        {
+            case 1:
+                String sqpage = request.getParameter("qpage");
+                int qpage = 1;
+                if(sqpage!=null){
+                    qpage = Integer.parseInt(sqpage);
+                }
+                QuestionManager questionManager = new QuestionManager(entityManager);
+                List<PerQueContent> questions = new ArrayList<PerQueContent>();
+                if(qpage < 1){
+                    qpage = 1;
+                }
+                else if(qpage > questionManager.getNumber(kobe.getUsrId())){
+                    qpage = questionManager.getNumber(kobe.getUsrId());
+                }
+                PersonQuestions personQuestions = questionManager.getSpecifyQuestion(kobe.getUsrId(),qpage);
+                Integer question_number = 0;
+                if(personQuestions != null){
+                    questions = questionManager.getSpecifyQuestions(personQuestions.getPqId());
+                    question_number = questionManager.getNumber(kobe.getUsrId());
+                }
+                request.setAttribute("personQuestions", personQuestions);
+                request.setAttribute("questions", questions);
+                request.setAttribute("qpage", qpage);
+                session.setAttribute("question_number", question_number);
+                request.getRequestDispatcher("/person_centerq.jsp").forward(request, response);
+                break;
+            case 2:
+                String sapage = request.getParameter("apage");
+                int apage = 0;
+                if(sapage!=null){
+                    apage = Integer.parseInt(sapage);
+                }
+                List<Articles> articles = new ArrayList<Articles>();
+                ArticleManager articleManager = new ArticleManager(entityManager);
+                articles = articleManager.getSpecifyArticle(apage,kobe.getUsrId());
+                Integer art_number = articleManager.getSize(kobe.getUsrId());
+                session.setAttribute("art_number", art_number);
+                request.setAttribute("articles", articles);
+                request.setAttribute("apage", apage);
+                request.getRequestDispatcher("/person_centera.jsp").forward(request, response);
+                break;
+            case 3:
+                request.getRequestDispatcher("/person_centerm.jsp").forward(request, response);
+                break;
+            case 4:
+                Recommend recommend = new Recommend(entityManager,kobe.getUsrId());
+                ArrayList<Articles> recArticles = (ArrayList<Articles>) recommend.getRecArticles();
+                request.setAttribute("recArticles", recArticles);
+                request.getRequestDispatcher("/person_centerr.jsp").forward(request, response);
+                break;
+            default:
+                request.getRequestDispatcher("/person_center.jsp").forward(request, response);
+        }
+        
        // response.sendRedirect("index.jsp");
     }
 
