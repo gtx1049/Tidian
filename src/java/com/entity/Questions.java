@@ -36,7 +36,7 @@ public class Questions implements Serializable {
     @NotNull
     @Lob
     @Column(name = "content")
-    private byte[] content;
+    private String content;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
@@ -91,7 +91,7 @@ public class Questions implements Serializable {
         this.queId = queId;
     }
 
-    public Questions(Integer queId, int usrId, String category, String subject, byte[] content, int point, int collectNumber, Date date, String status) {
+    public Questions(Integer queId, int usrId, String category, String subject, String content, int point, int collectNumber, Date date, String status) {
         this.queId = queId;
         this.usrId = usrId;
         this.category = category;
@@ -201,11 +201,11 @@ public class Questions implements Serializable {
         return "com.gtx.Questions[ queId=" + queId + " ]";
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

@@ -28,7 +28,7 @@
     </session-config>
     <resource-ref>
         <description>DB Connection</description>
-        <res-ref-name>jdbc/tidiandb</res-ref-name>
+        <res-ref-name>jdbc/tidianDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>

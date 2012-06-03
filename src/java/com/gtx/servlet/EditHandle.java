@@ -102,7 +102,7 @@ public class EditHandle extends HttpServlet {
         Users theuser = null;
         Questions newques = null;
         newques = new Questions();
-        newques.setContent(htmlData.getBytes());      
+        newques.setContent(htmlData);      
         newques.setPoint(0);
         newques.setCategory(cateloge);
         newques.setSubject(grade + subject);
