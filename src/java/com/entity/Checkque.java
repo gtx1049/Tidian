@@ -65,7 +65,7 @@ public class Checkque implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entity.Checkque[ checkquePK=" + checkquePK + " ]";
+        return "com.gtx.Checkque[ checkquePK=" + checkquePK + " ]";
     }
     
 }
