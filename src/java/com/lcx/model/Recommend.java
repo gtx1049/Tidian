@@ -47,7 +47,7 @@ public class Recommend {
         while(_it.hasNext()){
             personArticle = (PersonArticles)_it.next();
             int artId = personArticle.getPersonArticlesPK().getArtId();
-            for(int i = 0; i < results.size(); i++){
+            for(int i = 0, j = results.size(); i < j; i++){
                 if(results.get(i) == artId)
                     results.remove(i);
             }
